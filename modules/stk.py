@@ -3,181 +3,195 @@ import subprocess
 import json
 import urllib.parse
 import os
-from io import BytesIO
-from PIL import Image, ImageDraw
-from zlapi.models import Message, MultiMsgStyle, MessageStyle
-from zlapi._threads import ThreadType
 import time
 import random
+from PIL import Image, ImageDraw
+from zlapi.models import Message
+from zlapi._threads import ThreadType
 
 des = {
-    'version': "2.0.0",
+    'version': "2.1.0",
     'credits': "Bot Zalo Nguyen Hoang Dev ✓",
-    'description': "Tạo sticker từ ảnh, GIF, video.",
+    'description': "Tạo sticker từ ảnh / GIF / video",
     'power': "Thành viên"
 }
 
-def check_ffmpeg_webp_support():
+# ================== CHECK FFMPEG ==================
+def check_ffmpeg():
     try:
-        result = subprocess.run(["ffmpeg", "-codecs"], capture_output=True, text=True, check=True)
-        return "libwebp_anim" in result.stdout or "libwebp" in result.stdout
-    except (subprocess.CalledProcessError, FileNotFoundError):
+        subprocess.run(
+            ["ffmpeg", "-version"],
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+            check=True
+        )
+        return True
+    except:
         return False
 
+
+# ================== FILE TYPE ==================
 def get_file_type(url):
     try:
-        response = requests.head(url, allow_redirects=True, timeout=5)
-        content_type = response.headers.get("Content-Type", "").lower()
-        if "image" in content_type:
+        r = requests.get(url, stream=True, timeout=8, headers={
+            "User-Agent": "Mozilla/5.0"
+        })
+        ct = r.headers.get("Content-Type", "").lower()
+        if "image" in ct:
             return "image"
-        elif "video" in content_type:
+        if "video" in ct:
             return "video"
-        return "unknown"
-    except requests.RequestException:
-        return "unknown"
+    except:
+        pass
+    return "unknown"
 
+
+# ================== UPLOAD ==================
 def upload_to_uguu(file_path):
     try:
-        with open(file_path, 'rb') as file:
-            response = requests.post("https://uguu.se/upload", files={'files[]': file})
-            return response.json().get('files')[0].get('url')
+        with open(file_path, "rb") as f:
+            r = requests.post(
+                "https://uguu.se/upload",
+                files={"files[]": f},
+                timeout=15
+            )
+        return r.json()["files"][0]["url"]
     except:
         return None
 
-def convert_media_and_upload(media_url, file_type, unique_id, client):
-    script_dir = os.path.dirname(__file__)
-    temp_dir = os.path.join(script_dir, 'cache', 'temp')
-    
-    os.makedirs(temp_dir, exist_ok=True)
 
-    temp_input = os.path.join(temp_dir, f"pro_input_{unique_id}")
-    temp_webp = os.path.join(temp_dir, f"tranquan_{unique_id}.webp")
-    
-    files_to_cleanup = [temp_input, temp_webp]
+# ================== CONVERT ==================
+def convert_media_and_upload(media_url, file_type, uid):
+    base = os.path.join(os.path.dirname(__file__), "cache", "temp")
+    os.makedirs(base, exist_ok=True)
+
+    input_file = os.path.join(base, f"input_{uid}")
+    output_webp = os.path.join(base, f"sticker_{uid}.webp")
 
     try:
-        response = requests.get(media_url, stream=True, timeout=15)
-        response.raise_for_status()
-        
-        with open(temp_input, "wb") as f:
-            for chunk in response.iter_content(8192):
-                f.write(chunk)
+        # download
+        r = requests.get(media_url, stream=True, timeout=15)
+        r.raise_for_status()
+        with open(input_file, "wb") as f:
+            for c in r.iter_content(8192):
+                f.write(c)
 
+        # IMAGE
         if file_type == "image":
-            with Image.open(temp_input).convert("RGBA") as img:
+            with Image.open(input_file).convert("RGBA") as img:
                 img.thumbnail((512, 512), Image.Resampling.LANCZOS)
-                
-                width, height = img.size
-                mask = Image.new("L", (width, height), 0)
+
+                w, h = img.size
+                mask = Image.new("L", (w, h), 0)
                 draw = ImageDraw.Draw(mask)
-                draw.rounded_rectangle((0, 0, width, height), radius=50, fill=255)
+                draw.rounded_rectangle((0, 0, w, h), 60, fill=255)
+
                 img.putalpha(mask)
-                img.save(temp_webp, format="WEBP", quality=80, lossless=False)
+                img.save(output_webp, "WEBP", quality=85, method=6)
+
+        # VIDEO / GIF
         else:
             subprocess.run([
-                "ffmpeg", "-y", "-i", temp_input,
-                "-vf", "scale=512:-2",
-                "-c:v", "libwebp_anim",
+                "ffmpeg", "-y",
+                "-i", input_file,
+                "-vf", "scale=512:-1:flags=lanczos,fps=15",
+                "-t", "6",
                 "-loop", "0",
-                "-r", "15",
                 "-an",
+                "-c:v", "libwebp",
                 "-lossless", "0",
                 "-q:v", "80",
                 "-loglevel", "error",
-                temp_webp
-            ], check=True, capture_output=True, text=True)
+                output_webp
+            ], check=True)
 
-        return upload_to_uguu(temp_webp)
+        return upload_to_uguu(output_webp)
 
-    except subprocess.CalledProcessError as e:
-        print(f"Lỗi FFmpeg: {e.stderr}")
-        raise Exception(f"Lỗi FFmpeg: {e.stderr}")
-    except Exception as e:
-        print(f"Lỗi khi chuyển đổi media: {e}")
-        raise e
     finally:
-        for f in files_to_cleanup:
+        for f in (input_file, output_webp):
             if os.path.exists(f):
                 os.remove(f)
 
+
+# ================== COMMAND ==================
 def handle_stk_command(message, message_object, thread_id, thread_type, author_id, client):
-    if not check_ffmpeg_webp_support():
+
+    if not check_ffmpeg():
         client.replyMessage(
-            Message(text="➜ Lỗi: FFmpeg không hỗ trợ codec libwebp/libwebp_anim."),
-            message_object, thread_id, thread_type, ttl=60000
+            Message(text="❌ FFmpeg chưa được cài trên server."),
+            message_object, thread_id, thread_type
         )
         return
 
     if not message_object.quote or not message_object.quote.attach:
         client.replyMessage(
-            Message(text="➜ Vui lòng reply vào ảnh, GIF hoặc video để tạo sticker."),
-            message_object, thread_id, thread_type, ttl=60000
+            Message(text="➜ Reply vào ảnh / GIF / video để tạo sticker."),
+            message_object, thread_id, thread_type
         )
         return
 
     try:
-        attach_data = json.loads(message_object.quote.attach)
-    except (json.JSONDecodeError, TypeError):
-        client.replyMessage(Message(text="➜ Dữ liệu đính kèm không hợp lệ."), message_object, thread_id, thread_type, ttl=60000)
+        attach = json.loads(message_object.quote.attach)
+    except:
+        client.replyMessage(
+            Message(text="❌ Không đọc được dữ liệu đính kèm."),
+            message_object, thread_id, thread_type
+        )
         return
 
-    media_url = attach_data.get('hdUrl') or attach_data.get('href')
+    media_url = attach.get("hdUrl") or attach.get("href")
     if not media_url:
-        client.replyMessage(Message(text="➜ Không tìm thấy URL của media."), message_object, thread_id, thread_type, ttl=60000)
+        client.replyMessage(
+            Message(text="❌ Không tìm thấy media."),
+            message_object, thread_id, thread_type
+        )
         return
 
     media_url = urllib.parse.unquote(media_url.replace("\\/", "/"))
-
-    if "jxl" in media_url:
-        media_url = media_url.replace("jxl", "jpg")
+    media_url = media_url.replace(".jxl", ".jpg")
 
     file_type = get_file_type(media_url)
-    if file_type not in ["image", "video"]:
-        client.replyMessage(Message(text="➜ Loại file không được hỗ trợ."), message_object, thread_id, thread_type, ttl=60000)
+    if file_type not in ("image", "video"):
+        client.replyMessage(
+            Message(text="❌ File không hỗ trợ."),
+            message_object, thread_id, thread_type
+        )
         return
 
-    processing_msg = Message(text="➜ ⏳ Đang xử lý, vui lòng chờ...")
-    client.replyMessage(processing_msg, message_object, thread_id, thread_type, ttl=120000)
+    client.replyMessage(
+        Message(text="⏳ Đang tạo sticker..."),
+        message_object, thread_id, thread_type
+    )
 
     try:
-        unique_id = f"{thread_id}_{int(time.time())}_{random.randint(1000, 9999)}"
-        webp_url = convert_media_and_upload(media_url, file_type, unique_id, client)
-        
+        uid = f"{thread_id}_{int(time.time())}_{random.randint(1000,9999)}"
+        webp_url = convert_media_and_upload(media_url, file_type, uid)
+
         if not webp_url:
-            raise Exception("Không thể tạo hoặc tải lên sticker.")
+            raise Exception("Upload thất bại")
 
-# Gửi sticker sau khi tạo thành công
-        try:
-            # Nếu client hỗ trợ sendCustomSticker (API gốc)
-            if hasattr(client, "sendCustomSticker"):
-                client.sendCustomSticker(
-                    animationImgUrl=webp_url,
-                    staticImgUrl=webp_url,
-                    thread_id=thread_id,
-                    thread_type=thread_type,
-                    width=512,
-                    height=512
-                )
-            else:
-                # Dùng sendImage nếu không có API sticker
-                try:
-                    client.sendImage(webp_url, thread_id, thread_type, reply=message_object)
-                except TypeError:
-                    client.sendImage(webp_url, thread_id, thread_type)
-        except Exception as e:
-            client.replyMessage(
-                Message(text=f"➜ Lỗi khi gửi sticker: {e}"),
-                message_object, thread_id, thread_type, ttl=30000
+        # gửi sticker
+        if hasattr(client, "sendCustomSticker"):
+            client.sendCustomSticker(
+                animationImgUrl=webp_url,
+                staticImgUrl=webp_url,
+                width=512,
+                height=512,
+                thread_id=thread_id,
+                thread_type=thread_type
             )
+        else:
+            client.sendImage(webp_url, thread_id, thread_type)
 
-        
     except Exception as e:
         client.replyMessage(
-            Message(text=f"➜ Lỗi khi tạo sticker: {e}"),
-            message_object, thread_id, thread_type, ttl=30000
+            Message(text=f"❌ Lỗi tạo sticker: {e}"),
+            message_object, thread_id, thread_type
         )
 
+
+# ================== REGISTER ==================
 def get_hzlbot():
     return {
-        'stk': handle_stk_command
+        "stk": handle_stk_command
     }
