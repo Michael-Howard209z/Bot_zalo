@@ -11,9 +11,9 @@ from zlapi._threads import ThreadType
 
 # ================== INFO ==================
 des = {
-    "version": "2.2.0",
+    "version": "2.3.0",
     "credits": "Bot Zalo Nguyen Hoang Dev ✓",
-    "description": "Tạo sticker từ ảnh Zalo / GIF / video",
+    "description": "Tạo sticker từ ảnh Zalo / GIF / video (FIX JXL)",
     "power": "Thành viên"
 }
 
@@ -30,19 +30,36 @@ def check_ffmpeg():
     except:
         return False
 
-# ================== EXTRACT MEDIA URL (QUAN TRỌNG) ==================
+
+# ================== FIX URL JXL -> JPG (RẤT QUAN TRỌNG) ==================
+def fix_zalo_jxl_url(url: str) -> str:
+    if not url:
+        return url
+
+    # đổi thư mục jxl -> jpg
+    url = url.replace("/jxl/", "/jpg/")
+
+    # đổi đuôi .jxl -> .jpg
+    if url.endswith(".jxl"):
+        url = url[:-4] + ".jpg"
+
+    return url
+
+
+# ================== EXTRACT MEDIA URL ==================
 def extract_zalo_media_url(message_object):
     """
-    Lấy URL media chuẩn từ:
-    - Ảnh Zalo (chat.photo)
-    - Reply video / gif / ảnh
+    Hỗ trợ:
+    - Reply ảnh / video / gif
+    - Ảnh Zalo chat.photo
     """
 
-    # 1. Reply media (video / gif ...)
+    # 1. Reply media
     if message_object.quote and message_object.quote.attach not in (None, "{}"):
         try:
             attach = json.loads(message_object.quote.attach)
-            return attach.get("hdUrl") or attach.get("href")
+            url = attach.get("hdUrl") or attach.get("href")
+            return fix_zalo_jxl_url(url)
         except:
             pass
 
@@ -50,20 +67,24 @@ def extract_zalo_media_url(message_object):
     if message_object.msgType == "chat.photo":
         content = message_object.content or {}
 
-        # ưu tiên link HD trong params
+        # ưu tiên HD trong params
         params = content.get("params")
         if params:
             try:
                 p = json.loads(params)
                 if "hd" in p:
-                    return p["hd"].replace("\\/", "/")
+                    return fix_zalo_jxl_url(
+                        p["hd"].replace("\\/", "/")
+                    )
             except:
                 pass
 
-        # fallback
-        return content.get("href") or content.get("thumb")
+        return fix_zalo_jxl_url(
+            content.get("href") or content.get("thumb")
+        )
 
     return None
+
 
 # ================== FILE TYPE ==================
 def get_file_type(url):
@@ -86,6 +107,7 @@ def get_file_type(url):
 
     return "unknown"
 
+
 # ================== UPLOAD ==================
 def upload_to_uguu(file_path):
     try:
@@ -99,7 +121,8 @@ def upload_to_uguu(file_path):
     except:
         return None
 
-# ================== CONVERT ==================
+
+# ================== CONVERT MEDIA ==================
 def convert_media_and_upload(media_url, file_type, uid):
     base = os.path.join(os.path.dirname(__file__), "cache", "temp")
     os.makedirs(base, exist_ok=True)
@@ -124,12 +147,21 @@ def convert_media_and_upload(media_url, file_type, uid):
                     w, h = img.size
                     mask = Image.new("L", (w, h), 0)
                     draw = ImageDraw.Draw(mask)
-                    draw.rounded_rectangle((0, 0, w, h), 60, fill=255)
+                    draw.rounded_rectangle(
+                        (0, 0, w, h),
+                        radius=60,
+                        fill=255
+                    )
 
                     img.putalpha(mask)
-                    img.save(output_webp, "WEBP", quality=85, method=6)
+                    img.save(
+                        output_webp,
+                        "WEBP",
+                        quality=85,
+                        method=6
+                    )
             except Exception:
-                # nếu PIL mở không được → coi như video/gif
+                # PIL mở không được -> fallback sang video
                 file_type = "video"
 
         # VIDEO / GIF
@@ -155,7 +187,8 @@ def convert_media_and_upload(media_url, file_type, uid):
             if os.path.exists(f):
                 os.remove(f)
 
-# ================== COMMAND ==================
+
+# ================== COMMAND /stk ==================
 def handle_stk_command(message, message_object, thread_id, thread_type, author_id, client):
 
     if not check_ffmpeg():
@@ -168,13 +201,12 @@ def handle_stk_command(message, message_object, thread_id, thread_type, author_i
     media_url = extract_zalo_media_url(message_object)
     if not media_url:
         client.replyMessage(
-            Message(text="❌ Vui lòng reply ảnh / video hợp lệ."),
+            Message(text="❌ Vui lòng reply vào ảnh / video hợp lệ."),
             message_object, thread_id, thread_type
         )
         return
 
     media_url = urllib.parse.unquote(media_url)
-    media_url = media_url.replace(".jxl", ".jpg")
 
     file_type = get_file_type(media_url)
     if file_type == "unknown":
@@ -196,6 +228,7 @@ def handle_stk_command(message, message_object, thread_id, thread_type, author_i
         if not webp_url:
             raise Exception("Upload thất bại")
 
+        # gửi sticker
         if hasattr(client, "sendCustomSticker"):
             client.sendCustomSticker(
                 animationImgUrl=webp_url,
@@ -213,6 +246,7 @@ def handle_stk_command(message, message_object, thread_id, thread_type, author_i
             Message(text=f"❌ Lỗi tạo sticker: {e}"),
             message_object, thread_id, thread_type
         )
+
 
 # ================== REGISTER ==================
 def get_hzlbot():
