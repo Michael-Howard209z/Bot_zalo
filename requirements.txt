@@ -8,3 +8,4 @@ munch
 telethon
 gtts
 pillow
+pillow-jxl
