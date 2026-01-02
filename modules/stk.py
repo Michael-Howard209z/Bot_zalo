@@ -13,7 +13,7 @@ from zlapi._threads import ThreadType
 des = {
     "version": "3.0.0",
     "credits": "Bot Zalo Nguyen Hoang Dev ✓",
-    "description": "Tạo sticker từ ảnh JPG Zalo (sendLocalImage)",
+    "description": "Tạo sticker từ ảnh JPG Zalo (sendSticker)",
     "power": "Thành viên"
 }
 
@@ -75,11 +75,11 @@ def download_image(url, save_path):
 # ================== RESIZE TO STICKER ==================
 def make_sticker(input_path, output_path):
     img = Image.open(input_path).convert("RGBA")
-    img.thumbnail((512, 512), Image.LANCZOS)
+    img.thumbnail((128, 64), Image.LANCZOS)
 
-    canvas = Image.new("RGBA", (512, 512), (0, 0, 0, 0))
-    x = (512 - img.width) // 2
-    y = (512 - img.height) // 2
+    canvas = Image.new("RGBA", (128, 64), (0, 0, 0, 0))
+    x = (128 - img.width) // 2
+    y = (64 - img.height) // 2
     canvas.paste(img, (x, y), img)
 
     canvas.save(output_path, "PNG")
@@ -122,13 +122,13 @@ def handle_stk_command(message, message_object, thread_id, thread_type, author_i
         make_sticker(raw_path, sticker_path)
 
         # gửi sticker
-        client.sendLocalImage(
+        client.sendSticker(
             imagePath=sticker_path,
             thread_id=thread_id,
             thread_type=thread_type,
-            width=512,
-            height=512,
-            message=Message(text="✨ Sticker nè!")
+            width=128,
+            height=64,
+            ## message=Message(text="✨ Sticker đây!")
         )
 
     except Exception as e:
