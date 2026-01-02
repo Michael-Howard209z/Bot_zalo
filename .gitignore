@@ -1,0 +1,11 @@
+.env
+config.py
+.DS_Store
+setting.json
+zlapi_session.json
+client_id.txt
+userinfo.py.bak
+/TEMP
+/cache
+/__pycache__
+/.vscode
