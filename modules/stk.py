@@ -26,9 +26,9 @@ def fix_zalo_jxl_url(url: str):
 def extract_zalo_image_url(message_object):
 
     # Reply ảnh
-    if message_object.quote and message_object.quote.get("attach"):
+    if message_object.quote and message_object.quote.attach:
         try:
-            attach = json.loads(message_object.quote["attach"])
+            attach = json.loads(message_object.quote.attach)
             url = attach.get("href") or attach.get("hd") or attach.get("hdUrl")
             return fix_zalo_jxl_url(url)
         except:
