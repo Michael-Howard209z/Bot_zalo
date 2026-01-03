@@ -1,3 +1,4 @@
+from config import PREFIX
 import os
 import importlib
 import random
@@ -34,12 +35,14 @@ def handle_menu_command(message, message_object, thread_id, thread_type, author_
     
     # Thêm emoji ngẫu nhiên vào trước mỗi lệnh
     #numbered_hzlbot =  [f"- {random.choice(emojis)} {name}" for i, name in enumerate(command_names)]
+    prefix = PREFIX
     numbered_hzlbot =  [f"- {name}" for i, name in enumerate(command_names)]
-    menu_message = f"𝙈𝙚𝙣𝙪 \n{total_hzlbot} 𝐋ệ𝐧𝐡 𝐦𝐞𝐧𝐮\n 𝐔𝐩𝐝𝐚𝐭𝐞 : 𝐯𝟏.𝟎.𝟐 \n__________________________,\n" + "\n".join(numbered_hzlbot)
+    menu_message = f"𝙈𝙚𝙣𝙪 \n{total_hzlbot} 𝐋ệ𝐧𝐡 𝐦𝐞𝐧𝐮\n 𝐔𝐩𝐝𝐚𝐭𝐞 : 𝐯𝟏.𝟎.𝟐" + f"\n Prefix là: [{prefix}]\n" + f"\n__________________________,\n" + "\n".join(numbered_hzlbot)
     
     client.sendLocalImage("menu.jpg", thread_id=thread_id, thread_type=thread_type, message=Message(text=menu_message),ttl=120000)
 
-    client.replyMessage(message_to_send, message_object, thread_id, thread_type)
+    ## client.replyMessage(message_to_send, message_object, thread_id, thread_type)
+    client.replyMessage(message_object, thread_id, thread_type)
 
 def get_hzlbot():
     return {
