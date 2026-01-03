@@ -11,3 +11,4 @@ userinfo.py.bak
 /.vscode
 /sticker
 sticker
+__pycache__/
