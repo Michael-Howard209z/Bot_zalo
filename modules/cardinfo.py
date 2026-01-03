@@ -41,7 +41,7 @@ def handle_cardinfo_command(message, message_object, thread_id, thread_type, aut
     
     client.sendBusinessCard(userId=userId, qrCodeUrl=avatarUrl, thread_id=thread_id, thread_type=thread_type)
 
-def get_mitaizl():
+def get_hzlbot():
     return {
         'danhthiep': handle_cardinfo_command
     }

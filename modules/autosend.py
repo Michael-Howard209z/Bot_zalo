@@ -84,7 +84,7 @@ def handle_autosend_start(message, message_object, thread_id, thread_type, autho
     response_message = Message(text="loading autosend binz dev...")
     client.replyMessage(response_message, message_object, thread_id, thread_type)
 
-def get_mitaizl():
+def get_hzlbot():
     return {
         'autosend_on': handle_autosend_start
     }
