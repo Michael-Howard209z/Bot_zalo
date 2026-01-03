@@ -34,3 +34,6 @@ sticker/*
 modules/sticker_cache/
 
 modules/__pycache__/
+zlapi/__pycache__/_client.cpython-312.pyc
+modules/__pycache__/autosend.cpython-312.pyc
+modules/__pycache__/cardinfo.cpython-312.pyc
