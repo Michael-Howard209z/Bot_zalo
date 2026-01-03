@@ -25,7 +25,7 @@ def create_canvas(user_data):
     else:
         avatar_image = Image.open("default_avatar.jpg").convert("RGB")
 
-    avatar_size = (250, 250)
+    avatar_size = (50, 50)
     avatar_image = ImageOps.fit(avatar_image, avatar_size, centering=(0.5, 0.5))
 
     mask = Image.new("L", avatar_size, 0)
