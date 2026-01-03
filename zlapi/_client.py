@@ -3102,7 +3102,7 @@ class ZaloAPI(object):
         error_code = data.get("error_code")
         error_message = data.get("error_message") or data.get("data")
         raise ZaloAPIException(f"Error #{error_code} when sending requests: {error_message}")
-    
+    # dcm sendremote voice chứ đéo phải sendlocal voice
     def sendRemoteVoice(self, voiceUrl, thread_id, thread_type, fileSize=None, ttl=0):
         """Send voice by url.
             
