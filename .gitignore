@@ -16,6 +16,7 @@ __pycache__/
 *.pyd
 *.bak
 
+
 # ===== TEMP / CACHE =====
 TEMP/
 cache/

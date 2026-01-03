@@ -78,25 +78,25 @@ def handle_stk_command(message, message_object, thread_id, thread_type, author_i
         thread_type
     )
 
-    try:
-        client.send_custom_sticker(
-            staticImgUrl=image_url,
-            animationImgUrl=image_url,
-            thread_id=thread_id,
-            thread_type=thread_type,
-            reply=message_object.msgId,
-            ##width=512,
-           ## height=512,
-            contentId=int(time.time())
-        )
+    ##try:
+    client.send_custom_sticker(
+        staticImgUrl=image_url,
+        animationImgUrl=image_url,
+        thread_id=thread_id,
+        thread_type=thread_type,
+        reply=message_object.msgId,
+        ##width=512,
+    ## height=512,
+        contentId=int(time.time())
+    )
 
-    except Exception as e:
-        client.replyMessage(
-            Message(text=f"❌ Lỗi tạo sticker: {e}"),
-            message_object,
-            thread_id,
-            thread_type
-        )
+    ##except Exception as e:
+        ##client.replyMessage(
+         ##   Message(text=f"❌ Lỗi tạo sticker: {e}"),
+         ##   message_object,
+         ##   thread_id,
+         ##   thread_type
+       ## )
 
 
 # ================== REGISTER ==================
