@@ -59,7 +59,7 @@ def handle_autodown_command(message, message_object, thread_id, thread_type, aut
         error_message = Message(text=f"Đã xảy ra lỗi: {str(e)}")
         client.sendMessage(error_message, thread_id, thread_type)
 
-def get_mitaizl():
+def get_hzlbot():
     return {
         'autodown': handle_autodown_command
     }
