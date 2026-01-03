@@ -31,3 +31,6 @@ sticker/*
 
 # ===== LOG =====
 *.log
+modules/sticker_cache/
+
+modules/__pycache__/

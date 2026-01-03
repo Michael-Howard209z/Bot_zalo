@@ -109,27 +109,29 @@ def handle_stk_command(message, message_object, thread_id, thread_type, author_i
         # ===== IMAGE =====
         if media_type == "image":
             client.send_custom_sticker(
-                staticImgUrl=media_url,
-                thread_id=thread_id,
-                thread_type=thread_type,
-                reply=message_object.msgId,
-                width=GIF_SIZE,
-                height=GIF_SIZE,
-                contentId=int(time.time())
-            )
+            staticImgUrl=media_url,
+            animationImgUrl=media_url,
+            thread_id=thread_id,
+            thread_type=thread_type,
+            reply=message_object.msgId,
+            width=512,
+            height=512,
+            contentId=int(time.time())
+        )
             return
 
         # ===== GIF =====
         if media_type == "gif":
             client.send_custom_sticker(
-                animationImgUrl=media_url,
-                thread_id=thread_id,
-                thread_type=thread_type,
-                reply=message_object.msgId,
-                width=GIF_SIZE,
-                height=GIF_SIZE,
-                contentId=int(time.time())
-            )
+            staticImgUrl=media_url,      # BẮT BUỘC
+            animationImgUrl=media_url,
+            thread_id=thread_id,
+            thread_type=thread_type,
+            reply=message_object.msgId,
+            width=512,
+            height=512,
+            contentId=int(time.time())
+        )
             return
 
         # ===== VIDEO =====
