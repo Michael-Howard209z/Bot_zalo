@@ -82,7 +82,7 @@ def handle_reonamegr_command(message, message_object, thread_id, thread_type, au
     reo_thread = threading.Thread(target=reo_loop)
     reo_thread.start()
 
-def get_mitaizl():
+def get_hzlbot():
     return {
         'reonamegr': handle_reonamegr_command
     }

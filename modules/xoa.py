@@ -58,7 +58,7 @@ def handle_go_command(message, message_object, thread_id, thread_type, author_id
     else:
         client.replyMessage(Message(text=f"Đã xóa {deleted_count} tin nhắn thành công!"), message_object, thread_id, thread_type)
 
-def get_mitaizl():
+def get_hzlbot():
     return {
         'deletetn': handle_go_command
     }

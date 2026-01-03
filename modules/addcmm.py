@@ -39,7 +39,7 @@ def handle_adduser_by_phone_command(message, message_object, thread_id, thread_t
     gui = Message(text=send_message)
     client.sendMessage(gui, thread_id, thread_type)
 
-def get_mitaizl():
+def get_hzlbot():
     return {
         'addsdt': handle_adduser_by_phone_command
     }

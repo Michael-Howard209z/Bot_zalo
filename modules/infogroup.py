@@ -44,7 +44,7 @@ def handle_group_info_command(message, message_object, thread_id, thread_type, a
         error_message = Message(text=f"An unexpected error occurred: {str(e)}")
         client.sendMessage(error_message, thread_id, thread_type)
 
-def get_mitaizl():
+def get_hzlbot():
     return {
         'infogroup': handle_group_info_command
     }

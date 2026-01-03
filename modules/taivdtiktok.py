@@ -69,7 +69,7 @@ def handle_downvdtiktok_command(message, message_object, thread_id, thread_type,
         error_message = Message(text=f"Đã xảy ra lỗi không xác định: {str(e)}")
         client.sendMessage(error_message, thread_id, thread_type)
 
-def get_mitaizl():
+def get_hzlbot():
     return {
         'taivdtik': handle_downvdtiktok_command
     }

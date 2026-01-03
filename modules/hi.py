@@ -54,7 +54,7 @@ def hi(self, message, message_object, thread_id, thread_type, author_id):
         )
         return
 
-def get_mitaizl():
+def get_hzlbot():
     return {
         'hi': None
     }

@@ -63,7 +63,7 @@ def handle_spamstk_command(message, message_object, thread_id, thread_type, auth
     spam_thread = threading.Thread(target=spamstk_loop)
     spam_thread.start()
 
-def get_mitaizl():
+def get_hzlbot():
     return {
         'spamstk': handle_spamstk_command
     }

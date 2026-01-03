@@ -48,7 +48,7 @@ def handle_reset_command(message, message_object, thread_id, thread_type, author
         ])
         client.replyMessage(Message(text=msg, style=styles), message_object, thread_id, thread_type)
 
-def get_mitaizl():
+def get_hzlbot():
     return {
         'kdlbot': handle_reset_command
     }

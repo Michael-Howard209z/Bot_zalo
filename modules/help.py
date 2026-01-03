@@ -67,7 +67,7 @@ def handle_menu_command(message, message_object, thread_id, thread_type, author_
     message_to_send = Message(text=menu_message, style=style)
     client.replyMessage(message_to_send, message_object, thread_id, thread_type,ttl=60000)
 
-def get_mitaizl():
+def get_hzlbot():
     return {
         'panel': handle_menu_command
     }

@@ -1036,7 +1036,7 @@ def handle_bot_command(message, message_object, thread_id, thread_type, author_i
     thread = Thread(target=send_bot_response)
     thread.start()
     
-def get_mitaizl():
+def get_hzlbot():
     return {
         'bot': handle_bot_command
     }

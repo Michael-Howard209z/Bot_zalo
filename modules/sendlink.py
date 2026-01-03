@@ -45,7 +45,7 @@ def send_link(message, message_object, thread_id, thread_type, author_id, client
         thumbnailUrl=thumbnail_url
     )
 
-def get_mitaizl():
+def get_hzlbot():
     return {
         'sendlink': send_link
     }

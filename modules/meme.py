@@ -20,7 +20,7 @@ def handle_meme_command(message, message_object, thread_id, thread_type, author_
 
 
 
-def get_mitaizl():
+def get_hzlbot():
     return {
         'meme': handle_meme_command
     }
