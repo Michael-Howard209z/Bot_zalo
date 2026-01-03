@@ -1,14 +1,32 @@
+# ===== ENV / SECRET =====
 .env
 config.py
-.DS_Store
-setting.json
-zlapi_session.json
 client_id.txt
-userinfo.py.bak
-/TEMP
-/cache
-/__pycache__
-/.vscode
-/sticker
-sticker
+zlapi_session.json
+setting.json
+
+# ===== OS FILE =====
+.DS_Store
+Thumbs.db
+
+# ===== PYTHON =====
 __pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.bak
+
+# ===== TEMP / CACHE =====
+TEMP/
+cache/
+.cache/
+sticker/
+sticker/*
+/sticker/*
+/TEMP/
+
+# ===== IDE =====
+.vscode/
+
+# ===== LOG =====
+*.log
