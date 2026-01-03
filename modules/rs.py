@@ -7,8 +7,8 @@ ADMIN_ID = ADMIN
 
 des = {
     'version': "1.0.0",
-    'credits': "thịnh",
-    'description': "Restart lại bot"
+    'credits': "Hoàng",
+    'description': "Restart lại bot prefix (rs)"
 }
 
 def is_admin(author_id):
@@ -26,7 +26,7 @@ def handle_reset_command(message, message_object, thread_id, thread_type, author
         return
 
     try:
-        msg = f"• loading binz dev..."
+        msg = f"• loading hzl dev..."
         style = MultiMsgStyle([
             MessageStyle(offset=0, length=2, style="color", color="#80ff00", auto_format=False),
             MessageStyle(offset=2, length=len(msg) - 2, style="color", color="#a6e3a1", auto_format=False),
@@ -50,5 +50,5 @@ def handle_reset_command(message, message_object, thread_id, thread_type, author
 
 def get_hzlbot():
     return {
-        'kdlbot': handle_reset_command
+        'rs': handle_reset_command
     }

@@ -40,7 +40,7 @@ def start_auto(client):
         urls = response.json()
         video_url = random.choice(urls)
 
-        thumbnail_url = "https://f55-zpg-r.zdn.vn/jpg/866067064496219315/acc5444f5c38e466bd29.jpg"
+        thumbnail_url = "https://i.pinimg.com/736x/16/f1/df/16f1dfdf745ec2c272a68da4f67e427d.jpg"
         duration = '1000000000000000000000000000000000'
 
     except Exception as e:
@@ -48,7 +48,7 @@ def start_auto(client):
         return
 
     all_group = client.fetchAllGroups()
-    allowed_thread_ids = [gid for gid in all_group.gridVerMap.keys() if gid != '9034032228046851908']
+    allowed_thread_ids = [gid for gid in all_group.gridVerMap.keys() if gid != '663153538472384202']
 
     last_sent_time = None
 
@@ -81,7 +81,7 @@ def start_auto(client):
 def handle_autosend_start(message, message_object, thread_id, thread_type, author_id, client):
     # Khởi chạy auto trong luồng riêng
     threading.Thread(target=start_auto, args=(client,), daemon=True).start()
-    response_message = Message(text="loading autosend binz dev...")
+    response_message = Message(text="loading autosend hzl dev...")
     client.replyMessage(response_message, message_object, thread_id, thread_type)
 
 def get_hzlbot():
