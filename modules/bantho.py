@@ -90,7 +90,7 @@ def handle_user_info(message, message_object, thread_id, thread_type, author_id,
         error_message = Message(text=f"An unexpected error occurred: {str(e)}")
         client.replyMessage(error_message, message_object, thread_id, thread_type,ttl=10000)
 
-def get_mitaizl():
+def get_hzlbot():
     return {
         'bantho': handle_user_info
     }
