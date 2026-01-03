@@ -1997,7 +1997,7 @@ class ZaloAPI(object):
 				"href": pinMsg.content.href,
 				"thumb": pinMsg.content.thumb or "",
 				"title": pinMsg.content.title,
-				"linkCaption": "https://vrxx1337.vercel.app",
+				##"linkCaption": "https://vrxx1337.vercel.app",
 				"redirect_url": extra.get("redirect_url", ""),
 				"streamUrl": extra.get("streamUrl", ""),
 				"artist": extra.get("artist", ""),

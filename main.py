@@ -4,7 +4,24 @@ from zlapi import ZaloAPI
 from zlapi.models import Message
 from modules.bot_info import *
 from modules.da import welcome
+import itertools
 from colorama import Fore, Style, init
+
+GRADIENT_CORLORS = [
+    Fore.LIGHTMAGENTA_EX, #tím sáng
+    Fore.MAGENTA,         #tím
+    Fore.LIGHTBLUE_EX,    #xanh dương sáng
+    Fore.BLUE,            #xanh dương
+    Fore.CYAN,            #xanh lơ
+    Fore.LIGHTCYAN_EX,     #xanh lơ sáng
+                   
+]
+def gradient_text(text):
+    color_cycle = itertools.cycle(GRADIENT_CORLORS)
+    result = ""
+    for char in text:
+        result += next(color_cycle) +Style.BRIGHT + char
+        return result + Style.RESET_ALL
 
 init(autoreset=True)
 
@@ -25,7 +42,7 @@ class Client(ZaloAPI):
               f"- **Author ID:** {Fore.MAGENTA}{Style.BRIGHT}{author_id} {Style.NORMAL}\n"
               f"- **Thread ID:** {Fore.YELLOW}{Style.BRIGHT}{thread_id}{Style.NORMAL}\n"
               f"- **Thread Type:** {Fore.BLUE}{Style.BRIGHT}{thread_type}{Style.NORMAL}\n"
-              f"- **Message Object:** {Fore.RED}{Style.BRIGHT}{message_object}{Style.NORMAL}\n"
+              f"- **Message Object:** {Fore.LIGHTBLUE_EX}{Style.BRIGHT}{message_object}{Style.NORMAL}\n"
               f"{Fore.GREEN}{Style.BRIGHT}------------------------------\n"
               )
         allowed_thread_ids = get_allowed_thread_ids()
