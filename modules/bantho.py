@@ -39,7 +39,7 @@ def create_canvas(user_data):
     
     background_image.paste(avatar_image, (avatar_x, avatar_y), avatar_image)
 
-    fontc = "UTM AvoBold.ttf"
+    fontc = "UTM-AvoBold.ttf"
 
     font_title = ImageFont.truetype(fontc, 80)
     font_info = ImageFont.truetype(fontc, 80)
