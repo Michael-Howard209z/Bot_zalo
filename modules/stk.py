@@ -6,9 +6,9 @@ from zlapi._threads import ThreadType
 
 # ================== INFO ==================
 des = {
-    "version": "3.1.0",
+    "version": "3.2.0",
     "credits": "Bot Zalo Nguyen Hoang Dev ✓",
-    "description": "Tạo sticker từ ảnh Zalo (custom sticker)",
+    "description": "Tạo sticker từ ảnh / gif Zalo (custom sticker)",
     "power": "Thành viên"
 }
 
@@ -22,6 +22,11 @@ def fix_zalo_jxl_url(url: str):
     return url
 
 
+# ================== CHECK GIF ==================
+def is_gif(url: str) -> bool:
+    return url.lower().endswith(".gif")
+
+
 # ================== EXTRACT IMAGE URL ==================
 def extract_zalo_image_url(message_object):
 
@@ -29,8 +34,12 @@ def extract_zalo_image_url(message_object):
     if message_object.quote and message_object.quote.get("attach"):
         try:
             attach = json.loads(message_object.quote["attach"])
-            url = attach.get("href") or attach.get("hd") or attach.get("hdUrl")
-            return fix_zalo_jxl_url(url)
+            url = (
+                attach.get("href")
+                or attach.get("hd")
+                or attach.get("hdUrl")
+            )
+            return url
         except:
             pass
 
@@ -43,15 +52,11 @@ def extract_zalo_image_url(message_object):
             try:
                 p = json.loads(params)
                 if "hd" in p:
-                    return fix_zalo_jxl_url(
-                        p["hd"].replace("\\/", "/")
-                    )
+                    return p["hd"].replace("\\/", "/")
             except:
                 pass
 
-        return fix_zalo_jxl_url(
-            content.get("href") or content.get("thumb")
-        )
+        return content.get("href") or content.get("thumb")
 
     return None
 
@@ -62,7 +67,7 @@ def handle_stk_command(message, message_object, thread_id, thread_type, author_i
     image_url = extract_zalo_image_url(message_object)
     if not image_url:
         client.replyMessage(
-            Message(text="❌ Reply vào ảnh Zalo rồi gõ /stk"),
+            Message(text="❌ Reply vào ảnh hoặc GIF Zalo rồi gõ /stk"),
             message_object,
             thread_id,
             thread_type
@@ -71,6 +76,10 @@ def handle_stk_command(message, message_object, thread_id, thread_type, author_i
 
     image_url = urllib.parse.unquote(image_url)
 
+    # Fix JXL nếu không phải GIF
+    if not is_gif(image_url):
+        image_url = fix_zalo_jxl_url(image_url)
+
     client.replyMessage(
         Message(text="⏳ Đang tạo sticker..."),
         message_object,
@@ -78,25 +87,27 @@ def handle_stk_command(message, message_object, thread_id, thread_type, author_i
         thread_type
     )
 
-    ##try:
+    content_id = int(time.time())
+
+    # ====== GIF STICKER ======
+    if is_gif(image_url):
+        client.send_custom_sticker(
+            animationImgUrl=image_url,
+            thread_id=thread_id,
+            thread_type=thread_type,
+            reply=message_object.msgId,
+            contentId=content_id
+        )
+        return
+
+    # ====== STATIC STICKER ======
     client.send_custom_sticker(
         staticImgUrl=image_url,
-        animationImgUrl=image_url,
         thread_id=thread_id,
         thread_type=thread_type,
         reply=message_object.msgId,
-        ##width=512,
-    ## height=512,
-        contentId=int(time.time())
+        contentId=content_id
     )
-
-    ##except Exception as e:
-        ##client.replyMessage(
-         ##   Message(text=f"❌ Lỗi tạo sticker: {e}"),
-         ##   message_object,
-         ##   thread_id,
-         ##   thread_type
-       ## )
 
 
 # ================== REGISTER ==================
