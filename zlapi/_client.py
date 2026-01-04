@@ -4362,12 +4362,13 @@ class ZaloAPI(object):
     
     def onListening(self):
         """Called when the client is listening."""
-        logger.debug("BẠN ĐANG DÙNG API ZLAPI 1.0.3😁")
+        logger.debug("BẠN ĐANG DÙNG API ZLAPI 2.0.0😁")
     
     def onMessage(
         self,
         mid=None,
         author_id=None,
+        dName=None,
         message=None,
         message_object=None,
         thread_id=None,
@@ -4447,7 +4448,7 @@ class ZaloAPI(object):
     """
     END EVENTS
     """
-def sendTodo(self, target_id, content, mid, author_id, thread_type, thread_id=None):
+def sendTodo(self, target_id, content, mid, author_id, dName, thread_type, thread_id=None):
         """Send todo notification to a User/Group.
         
         Args:
