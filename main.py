@@ -35,12 +35,12 @@ class Client(ZaloAPI):
         self.command_handler = CommandHandler(self)
     def onEvent(self,event_data,event_type):
         welcome(self,event_data,event_type)
-    def onMessage(self, mid, author_id, dName, message, message_object, thread_id, thread_type):
+    def onMessage(self, mid, author_id, message, message_object, thread_id, thread_type):
         print(f"∥{Fore.LIGHTGREEN_EX}{Style.BRIGHT}══════════════════════════════════════\n"
               f"∥Message Details:**\n"
               f"∥Message:** {Style.BRIGHT}{message} {Style.NORMAL}\n"
               f"∥Author ID:** {Fore.MAGENTA}{Style.BRIGHT}{author_id} {Style.NORMAL}\n"
-              f"∥Name: {Fore.CYAN}{Style.BRIGHT}{dName}{Style.NORMAL}\n"
+              f"∥Name: {Fore.CYAN}{Style.BRIGHT}{Style.NORMAL}\n"
               f"∥Thread ID:** {Fore.YELLOW}{Style.BRIGHT}{thread_id}{Style.NORMAL}\n"
               f"∥Thread Type:** {Fore.BLUE}{Style.BRIGHT}{thread_type}{Style.NORMAL}\n"
               f"∥Message Object:** {Fore.LIGHTBLUE_EX}{Style.BRIGHT}{message_object}{Style.NORMAL}\n"
@@ -48,13 +48,13 @@ class Client(ZaloAPI):
               )
         allowed_thread_ids = get_allowed_thread_ids()
         if thread_id in allowed_thread_ids and thread_type == ThreadType.GROUP and not is_admin(author_id):
-            handle_check_profanity(self, author_id, dName, thread_id, message_object, thread_type, message)
+            handle_check_profanity(self, author_id, thread_id, message_object, thread_type, message)
         try:
             if isinstance(message,str):
                 if message == f"{PREFIX}":
                     self.send(Message(text=f"Dùng {PREFIX}menu để biết rõ hơn"),thread_id,thread_type)
                     return
-                self.command_handler.handle_command(message, author_id, dName, message_object, thread_id, thread_type)
+                self.command_handler.handle_command(message, author_id, message_object, thread_id, thread_type)
         except:
             pass
 
