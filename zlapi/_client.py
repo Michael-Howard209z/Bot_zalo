@@ -3102,7 +3102,7 @@ class ZaloAPI(object):
         error_code = data.get("error_code")
         error_message = data.get("error_message") or data.get("data")
         raise ZaloAPIException(f"Error #{error_code} when sending requests: {error_message}")
-    # dcm sendremote voice chứ đéo phải sendlocal voice
+    # dcm sendremote voice chứ đéo phải sendlo
     def sendRemoteVoice(self, voiceUrl, thread_id, thread_type, fileSize=None, ttl=0):
         """Send voice by url.
             
@@ -4362,13 +4362,12 @@ class ZaloAPI(object):
     
     def onListening(self):
         """Called when the client is listening."""
-        logger.debug("BẠN ĐANG DÙNG API ZLAPI 2.0.0😁")
+        logger.debug("BẠN ĐANG DÙNG API ZLAPI 1.0.3😁")
     
     def onMessage(
         self,
         mid=None,
         author_id=None,
-        dName=None,
         message=None,
         message_object=None,
         thread_id=None,
@@ -4448,7 +4447,7 @@ class ZaloAPI(object):
     """
     END EVENTS
     """
-def sendTodo(self, target_id, content, mid, author_id, dName, thread_type, thread_id=None):
+def sendTodo(self, target_id, content, mid, author_id, thread_type, thread_id=None):
         """Send todo notification to a User/Group.
         
         Args:
