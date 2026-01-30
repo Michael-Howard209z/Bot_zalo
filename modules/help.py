@@ -9,7 +9,7 @@ des = {
     'description': "Lấy thông tin nhóm"
 }
 
-# Copyright Tamhoangdz
+
 def get_all_mitaizl():
     mitaizl = {}
 
@@ -25,16 +25,15 @@ def get_all_mitaizl():
     command_names = list(mitaizl.keys())
     return command_names
 
-# Copyright Tamhoangdz
 def handle_menu_command(message, message_object, thread_id, thread_type, author_id, client):
     command_names = get_all_mitaizl()
     total_commands = len(command_names)
     total_pages = 7  # Fixed to 7 pages
 
-# Copyright Tamhoangdz
+
     items_per_page = math.ceil(total_commands / total_pages)
 
-# Copyright Tamhoangdz
+
     page_number = 1
     if message.startswith(",help "):
         try:
@@ -42,10 +41,10 @@ def handle_menu_command(message, message_object, thread_id, thread_type, author_
         except (IndexError, ValueError):
             page_number = 1
 
-# Copyright Tamhoangdz
+
     page_number = max(1, min(total_pages, page_number))
 
-# Copyright Tamhoangdz
+
     start_index = (page_number - 1) * items_per_page
     end_index = min(start_index + items_per_page, total_commands)
     paged_commands = command_names[start_index:end_index]

@@ -2,6 +2,11 @@
 import random
 import websockets
 import requests, json
+import os
+import signal
+import time
+import threading
+import urllib.parse
 
 from .models import *
 from ._package import *
@@ -4092,8 +4097,7 @@ class ZaloAPI(object):
             self._condition.set()
             print("\x1b[1K")
             logger.warning("Stop Listen Because KeyboardInterrupt Exception!")
-            pid = os.getpid()
-            os.kill(pid, signal.SIGTERM)
+            raise KeyboardInterrupt()
         
         except Exception as e:
             self._condition.set()
@@ -4263,8 +4267,7 @@ class ZaloAPI(object):
                     ws.close()
                     print("\x1b[1K")
                     logger.warning("Stop Listen Because KeyboardInterrupt Exception!")
-                    pid = os.getpid()
-                    os.kill(pid, signal.SIGTERM)
+                    raise KeyboardInterrupt()
                 
                 except websockets.ConnectionClosedOK:
                     self._condition.set()
@@ -4507,7 +4510,7 @@ def sendTodo(self, target_id, content, mid, author_id, thread_type, thread_id=No
                 "watchers": "[]",
                 "schedule": None,
                 "src": src,
-                "imei": self.imei
+                "imei": self._imei
             }
         }
 

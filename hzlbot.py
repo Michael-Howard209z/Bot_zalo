@@ -13,6 +13,7 @@ class CommandHandler:
         self.client = client
         self.hzlbot = self.load_hzlbot()
         self.auto_hzlbot = self.load_auto_hzlbot()
+        self.global_handlers = self.load_global_handlers()
 
     def load_hzlbot(self):
         hzlbot = {}
@@ -56,7 +57,7 @@ class CommandHandler:
         failed_auto_hzlbot = []
 
         for filename in os.listdir('modules/auto'):
-            if filename.endswith('.py') and filename != '__init__.py':
+            if filename.endswith('.py') and filename != '__init__.py' and filename != 'autoreact.py':
                 module_name = filename[:-3]
                 try:
                     module = importlib.import_module(f'{auto_modules_path}.{module_name}')
@@ -78,7 +79,47 @@ class CommandHandler:
 
         return auto_hzlbot
 
+    def load_global_handlers(self):
+        """Load các handler toàn cục (chạy với mọi tin nhắn) từ folder 'modules/auto'."""
+        global_handlers = []
+        auto_modules_path = 'modules.auto'
+        success_count = 0
+        failed_count = 0
+        success_global = []
+        failed_global = []
+
+        for filename in os.listdir('modules/auto'):
+            if filename.endswith('.py') and filename != '__init__.py':
+                module_name = filename[:-3]
+                try:
+                    module = importlib.import_module(f'{auto_modules_path}.{module_name}')
+                    if hasattr(module, 'get_global_hzlbot'):
+                        handlers = module.get_global_hzlbot()
+                        if isinstance(handlers, list):
+                            global_handlers.extend(handlers)
+                            success_count += 1
+                            success_global.append(module_name)
+                    # Không raise error nếu không có get_global_hzlbot
+                except Exception as e:
+                    print(f"{BOLD}{RED}Không thể load được global handler: {module_name}. Lỗi: {e}{RESET}")
+                    failed_count += 1
+                    failed_global.append(module_name)
+
+        if success_count > 0:
+            print(f"{BOLD}{GREEN}Đã load thành công {success_count} global handler: {', '.join(success_global)}{RESET}")
+        if failed_count > 0:
+            print(f"{BOLD}{RED}Không thể load được {failed_count} global handler: {', '.join(failed_global)}{RESET}")
+
+        return global_handlers
+
     def handle_command(self, message, author_id, message_object, thread_id, thread_type):
+        # Chạy global handlers trước (chạy với mọi tin nhắn)
+        for handler in self.global_handlers:
+            try:
+                handler(message, message_object, thread_id, thread_type, author_id, self.client)
+            except Exception as e:
+                print(f"{BOLD}{RED}[GLOBAL HANDLER ERROR] {e}{RESET}")
+        
         # Xử lý các lệnh không cần prefix
         auto_command_handler = self.auto_hzlbot.get(message.lower())
         if auto_command_handler:

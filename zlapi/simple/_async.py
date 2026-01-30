@@ -4171,8 +4171,10 @@ class ZaloAPI(object):
 			self._listening = False
 	
 	async def _fix_recv(self):
-		old_timestamp = int(time.time())
-		await asyncio.sleep(50 * 60)
+		for _ in range(50 * 60):
+			if self._condition.is_set():
+				return
+			await asyncio.sleep(1)
 		self._start_fix = True
 		self._condition.set()
 	
