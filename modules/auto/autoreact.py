@@ -10,7 +10,7 @@ des = {
 }
 
 # ================== CONFIG ==================
-REACTION_ICON = "💢💥💤"   # icon react (👍 😂 ❤️ 😆 😡 🔥 ...)
+REACTION_ICON = "♛"   # icon react (👍 😂 ❤️ 😆 😡 🔥 ...)
 REACTION_TYPE = 75     # mặc định của Zalo
 AUTO_REACT_ENABLED = True  # Bật/tắt auto react
 
@@ -24,10 +24,14 @@ def handle_autoreact(message, message_object, thread_id, thread_type, author_id,
         return
 
     # ❌ bỏ qua tin nhắn của bot
-   # if str(author_id) == str(client.uid):
-     #   return
+    if str(author_id) == str(client.uid):
+        return
 
-    # ❌ chỉ react tin nhắn thường
+    # ❌ bỏ qua sự kiện reaction (tránh lặp vô hạn)
+    if message_object.msgType == "chat.reaction":
+        return
+
+    # ❌ chỉ react tin nhắn thường (webchat hoặc chat.recommended)
     if not message_object or not hasattr(message_object, 'msgId') or not message_object.msgId:
         return
 

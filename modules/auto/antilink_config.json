@@ -1,6 +1,19 @@
 {
-    "663153538472384202": {
-        "status": true,
-        "whitelist": []
-    }
+  "663153538472384202": {
+    "status": true,
+    "whitelist": [
+      "facebook.com",
+      "zalo.me",
+      "youtube.com",
+      "https://drive.google.com/"
+    ],
+    "delete_msg": true,
+    "warn_user": true
+  },
+  "987654321": {
+    "status": false,
+    "whitelist": [],
+    "delete_msg": true,
+    "warn_user": false
+  }
 }

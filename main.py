@@ -73,22 +73,25 @@ class Client(ZaloAPI):
                     self, author_id, thread_id, message_object, thread_type, message
                 )
 
-            if isinstance(message, str):
-                if message == PREFIX:
-                    self.send(
-                        Message(text=f"Dùng {PREFIX}menu để biết rõ hơn"),
-                        thread_id,
-                        thread_type
-                    )
-                    return
-
-                self.command_handler.handle_command(
-                    message,
-                    author_id,
-                    message_object,
+            # Xử lý tin nhắn để chạy Command Handler
+            # Nếu message không phải string (vd: link preview, sticker), gán là chuỗi rỗng để vẫn chạy được global handlers
+            message_text = message if isinstance(message, str) else ""
+            
+            if message_text == PREFIX:
+                self.send(
+                    Message(text=f"Dùng {PREFIX}menu để biết rõ hơn"),
                     thread_id,
                     thread_type
                 )
+                return
+
+            self.command_handler.handle_command(
+                message_text,
+                author_id,
+                message_object,
+                thread_id,
+                thread_type
+            )
 
         except KeyboardInterrupt:
             raise  # ⚠️ KHÔNG NUỐT CTRL+C

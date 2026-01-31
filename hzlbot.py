@@ -57,7 +57,7 @@ class CommandHandler:
         failed_auto_hzlbot = []
 
         for filename in os.listdir('modules/auto'):
-            if filename.endswith('.py') and filename != '__init__.py' and filename != 'autoreact.py':
+            if filename.endswith('.py') and filename != '__init__.py' and filename not in ['autoreact.py', 'antilink.py']:
                 module_name = filename[:-3]
                 try:
                     module = importlib.import_module(f'{auto_modules_path}.{module_name}')
