@@ -23,15 +23,15 @@ def handle_autoreact(message, message_object, thread_id, thread_type, author_id,
     if not AUTO_REACT_ENABLED:
         return
 
-    # ❌ bỏ qua tin nhắn của bot
+    #bỏ qua tin nhắn của bot
     if str(author_id) == str(client.uid):
         return
 
-    # ❌ bỏ qua sự kiện reaction (tránh lặp vô hạn)
+    #bỏ qua sự kiện reaction (tránh lặp vô hạn)
     if message_object.msgType == "chat.reaction":
         return
 
-    # ❌ chỉ react tin nhắn thường (webchat hoặc chat.recommended)
+    #chỉ react tin nhắn thường (webchat hoặc chat.recommended)
     if not message_object or not hasattr(message_object, 'msgId') or not message_object.msgId:
         return
 

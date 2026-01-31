@@ -123,7 +123,7 @@ if __name__ == "__main__":
     client = Client(API_KEY, SECRET_KEY, IMEI, SESSION_COOKIES)
 
     try:
-        # ❗ KHÔNG dùng thread=True để Ctrl+C dừng chuẩn
+        #  KHÔNG dùng thread=True để Ctrl+C dừng chuẩn
         client.listen(thread=False, delay=0)
     except KeyboardInterrupt:
         cleanup()

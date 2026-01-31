@@ -199,16 +199,16 @@ def handle_antilink(message, message_object, thread_id, thread_type, author_id, 
                             clientMsgId=message_object.cliMsgId,
                             groupId=thread_id
                         )
-                        print(f"[ANTILINK] ✅ Đã xóa tin nhắn chứa link từ {author_id} trong nhóm {thread_id}")
+                        print(f"[ANTILINK] Đã xóa tin nhắn chứa link từ {author_id} trong nhóm {thread_id}")
                     else:
-                        print(f"[ANTILINK] ❌ Không thể xóa tin nhắn: thiếu msgId hoặc cliMsgId")
+                        print(f"[ANTILINK] Không thể xóa tin nhắn: thiếu msgId hoặc cliMsgId")
                 except Exception as e:
                     print(f"[ANTILINK] Lỗi khi xóa tin nhắn: {e}")
             
             # Gửi cảnh báo nếu được bật
             if settings.get('warn_user', True):
                 try:
-                    warning_text = "⚠️ Phát hiện gửi link không được phép! Vui lòng đọc kĩ rule nhóm."
+                    warning_text = " Phát hiện gửi link không được phép! Vui lòng đọc kĩ rule nhóm."
                     
                     client.send(
                         Message(text=warning_text),
@@ -234,7 +234,7 @@ def toggle_antilink(thread_id, status):
     settings = get_group_settings(thread_id)
     settings['status'] = status
     set_group_settings(thread_id, settings)
-    return f"✅ Đã {'bật' if status else 'tắt'} antilink cho nhóm {thread_id}"
+    return f" Đã {'bật' if status else 'tắt'} antilink cho nhóm {thread_id}"
 
 def add_to_whitelist(thread_id, domain):
     """Thêm domain vào whitelist"""
@@ -244,8 +244,8 @@ def add_to_whitelist(thread_id, domain):
             settings['whitelist'] = []
         settings['whitelist'].append(domain)
         set_group_settings(thread_id, settings)
-        return f"✅ Đã thêm '{domain}' vào whitelist"
-    return f"⚠️ '{domain}' đã có trong whitelist"
+        return f" Đã thêm '{domain}' vào whitelist"
+    return f" '{domain}' đã có trong whitelist"
 
 def remove_from_whitelist(thread_id, domain):
     """Xóa domain khỏi whitelist"""
@@ -253,8 +253,8 @@ def remove_from_whitelist(thread_id, domain):
     if 'whitelist' in settings and domain in settings['whitelist']:
         settings['whitelist'].remove(domain)
         set_group_settings(thread_id, settings)
-        return f"✅ Đã xóa '{domain}' khỏi whitelist"
-    return f"⚠️ '{domain}' không có trong whitelist"
+        return f" Đã xóa '{domain}' khỏi whitelist"
+    return f" '{domain}' không có trong whitelist"
 
 def get_whitelist(thread_id):
     """Lấy danh sách whitelist của nhóm"""
