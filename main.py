@@ -9,6 +9,9 @@ import itertools
 import signal
 import sys
 import atexit
+import os
+import time
+import threading
 from colorama import Fore, Style, init
 
 # ================== COLOR ==================
@@ -109,6 +112,13 @@ def cleanup():
 
 atexit.register(cleanup)
 
+# ================== AUTO RESTART ==================
+def auto_restart(interval_seconds):
+    time.sleep(interval_seconds)
+    print(f"\n{Fore.CYAN}{Style.BRIGHT}Hệ thống đang tự động khởi động lại sau 3 giờ...{Style.RESET_ALL}")
+    python = sys.executable
+    os.execl(python, python, *sys.argv)
+
 # ================== SIGNAL ==================
 def signal_handler(sig, frame):
     print(f"\n{Fore.RED}{Style.BRIGHT}Nhận Ctrl+C, đang tắt bot...{Style.RESET_ALL}")
@@ -121,6 +131,10 @@ signal.signal(signal.SIGTERM, signal_handler)
 # ================== MAIN ==================
 if __name__ == "__main__":
     client = Client(API_KEY, SECRET_KEY, IMEI, SESSION_COOKIES)
+
+    # Khởi động thread tự động restart sau mỗi 3 giờ (10800 giây)
+    restart_thread = threading.Thread(target=auto_restart, args=(10800,), daemon=True)
+    restart_thread.start()
 
     try:
         #  KHÔNG dùng thread=True để Ctrl+C dừng chuẩn
