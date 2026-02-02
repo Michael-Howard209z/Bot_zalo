@@ -136,7 +136,7 @@ class CommandHandler:
             command_handler(message, message_object, thread_id, thread_type, author_id, self.client)
         else:
             self.client.sendMessage(
-                f"Không tìm thấy lệnh '{command_name}'. Hãy dùng {PREFIX}menu để biết các lệnh có trên hệ thống.", 
+                Message(text=f"Không tìm thấy lệnh '{command_name}'. Hãy dùng {PREFIX}menu để biết các lệnh có trên hệ thống."), 
                 thread_id, 
                 thread_type
             )

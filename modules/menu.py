@@ -41,8 +41,7 @@ def handle_menu_command(message, message_object, thread_id, thread_type, author_
     
     client.sendLocalImage("menu.jpg", thread_id=thread_id, thread_type=thread_type, message=Message(text=menu_message),ttl=120000)
 
-    ## client.replyMessage(message_to_send, message_object, thread_id, thread_type)
-    client.replyMessage(message_object, thread_id, thread_type)
+    # Bot already sent image with menu message, no need for redundant replyMessage
 
 def get_hzlbot():
     return {

@@ -133,7 +133,7 @@ if __name__ == "__main__":
     client = Client(API_KEY, SECRET_KEY, IMEI, SESSION_COOKIES)
 
     # Khởi động thread tự động restart sau mỗi 3 giờ (10800 giây)
-    restart_thread = threading.Thread(target=auto_restart, args=(30,), daemon=True)
+    restart_thread = threading.Thread(target=auto_restart, args=(10800,), daemon=True)
     restart_thread.start()
 
     try:

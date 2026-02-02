@@ -41,15 +41,19 @@ PREFIX = "..." # Command start character (e.g., .help, .menu)
 ADMIN = "YOUR_ADMIN_ID" # Bot Admin ID
 ```
 
-> **Note:** You need the IMEI and Session Cookies of your Zalo account for the bot to work. You can use the `I am developing further.` extension or similar tools to get cookies.
-
 ### Step 4: Run the Bot
 
 ```bash
 python main.py
-
 ```
+
+## 🧩 Zalo Extension (Recommended)
+To make retrieving **IMEI** and **Cookies** easier and more professional, use the extension included in this project.
+
+[**How to install Extension Zalo cookie (Material 3)**](./zlapi-extension-obfuscated/README.md)
+
 ## Basic Command List
+nuh uh
 
 ## ⚠️ Important Note
 - The bot runs on your personal Zalo account; use it carefully to avoid account suspension due to spam.

@@ -1,0 +1,226 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
+:root {
+  --m3-primary: #0061a4;
+  --m3-on-primary: #ffffff;
+  --m3-primary-container: #d1e4ff;
+  --m3-on-primary-container: #001d36;
+  --m3-secondary: #535f70;
+  --m3-on-secondary: #ffffff;
+  --m3-surface: #fdfbff;
+  --m3-surface-variant: #dfe3eb;
+  --m3-on-surface: #1a1c1e;
+  --m3-on-surface-variant: #43474e;
+  --m3-outline: #73777f;
+  --m3-error: #ba1a1a;
+  --m3-elevation-1: 0px 1px 3px 1px rgba(0, 0, 0, 0.15), 0px 1px 2px 0px rgba(0, 0, 0, 0.3);
+  --m3-elevation-2: 0px 2px 6px 2px rgba(0, 0, 0, 0.15), 0px 1px 2px 0px rgba(0, 0, 0, 0.3);
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--m3-surface);
+  color: var(--m3-on-surface);
+  width: 380px;
+  margin: 0;
+  padding: 16px;
+  box-sizing: border-box;
+}
+
+.m3-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.m3-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.m3-header img {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+}
+
+.m3-header h1 {
+  font-size: 20px;
+  font-weight: 500;
+  margin: 0;
+  color: var(--m3-primary);
+}
+
+.m3-card {
+  background-color: var(--m3-surface-variant);
+  border-radius: 16px;
+  padding: 16px;
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.m3-card:hover {
+  box-shadow: var(--m3-elevation-1);
+}
+
+.m3-label {
+  font-size: 12px;
+  font-weight: 500;
+  margin-bottom: 8px;
+  color: var(--m3-on-surface-variant);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.m3-input-group {
+  display: flex;
+  background-color: var(--m3-surface);
+  border: 1px solid var(--m3-outline);
+  border-radius: 8px;
+  overflow: hidden;
+  align-items: center;
+  transition: border-color 0.2s;
+}
+
+.m3-input-group:focus-within {
+  border-color: var(--m3-primary);
+  border-width: 2px;
+}
+
+.m3-input-group.disabled {
+  opacity: 0.6;
+  background-color: #f1f3f4;
+}
+
+input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  padding: 12px;
+  font-size: 14px;
+  color: var(--m3-on-surface);
+  font-family: inherit;
+  outline: none;
+  width: 100%;
+}
+
+.m3-icon-button {
+  background: transparent;
+  border: none;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-left: 1px solid var(--m3-outline);
+  color: var(--m3-primary);
+  transition: background-color 0.2s;
+}
+
+.m3-icon-button:hover {
+  background-color: rgba(0, 97, 164, 0.08);
+}
+
+.m3-icon-button:active {
+  background-color: rgba(0, 97, 164, 0.12);
+}
+
+.m3-button-primary {
+  background-color: var(--m3-primary);
+  color: var(--m3-on-primary);
+  border: none;
+  border-radius: 100px;
+  padding: 12px 24px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  width: 100%;
+  transition: box-shadow 0.2s, background-color 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.m3-button-primary:hover {
+  box-shadow: var(--m3-elevation-2);
+  background-color: #0070bc;
+}
+
+.m3-button-primary:active {
+  background-color: #005691;
+}
+
+#loading_data {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  visibility: hidden;
+}
+
+#loading_data.active {
+  visibility: visible;
+}
+
+.spinner {
+  width: 48px;
+  height: 48px;
+  animation: rotate 2s linear infinite;
+}
+
+.spinner .path {
+  stroke: var(--m3-primary);
+  stroke-linecap: round;
+  animation: dash 1.5s ease-in-out infinite;
+}
+
+@keyframes rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes dash {
+  0% {
+    stroke-dasharray: 1, 150;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: -35;
+  }
+  100% {
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: -124;
+  }
+}
+
+/* Tooltip custom animation */
+.copied-badge {
+    position: absolute;
+    right: 16px;
+    top: 8px;
+    background: var(--m3-primary);
+    color: white;
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 4px;
+    transform: translateY(-20px);
+    opacity: 0;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.copied-badge.show {
+    transform: translateY(0);
+    opacity: 1;
+}
