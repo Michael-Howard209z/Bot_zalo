@@ -10,7 +10,7 @@ des = {
 }
 
 # ================== CONFIG ==================
-REACTION_ICON = "♛"   # icon react (👍 😂 ❤️ 😆 😡 🔥 ...)
+REACTION_ICON = "❤️"   # icon react (👍 😂 ❤️ 😆 😡 🔥 ...)
 REACTION_TYPE = 75     # mặc định của Zalo
 AUTO_REACT_ENABLED = True  # Bật/tắt auto react
 

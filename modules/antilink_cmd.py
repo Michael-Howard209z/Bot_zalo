@@ -21,11 +21,11 @@ def handle_antilink_command(message, message_object, thread_id, thread_type, aut
     """
     Xử lý lệnh quản lý antilink
     Cú pháp:
-        /antilink on/off - Bật/tắt antilink
-        /antilink add <domain> - Thêm domain vào whitelist
-        /antilink remove <domain> - Xóa domain khỏi whitelist
-        /antilink list - Xem danh sách whitelist
-        /antilink status - Xem trạng thái hiện tại
+        <prefix>antilink on/off - Bật/tắt antilink
+        <prefix>antilink add <domain> - Thêm domain vào whitelist
+        <prefix>antilink remove <domain> - Xóa domain khỏi whitelist
+        <prefix>antilink list - Xem danh sách whitelist
+        <prefix>antilink status - Xem trạng thái hiện tại
     """
     try:
         # Chỉ hoạt động trong nhóm
@@ -53,13 +53,13 @@ def handle_antilink_command(message, message_object, thread_id, thread_type, aut
             # Hiển thị hướng dẫn
             help_text = (
                 "📋 **Hướng dẫn sử dụng Antilink**\n\n"
-                "🔹 `/antilink on` - Bật chống link\n"
-                "🔹 `/antilink off` - Tắt chống link\n"
-                "🔹 `/antilink add <domain>` - Thêm domain vào whitelist\n"
-                "   Ví dụ: `/antilink add facebook.com`\n"
-                "🔹 `/antilink remove <domain>` - Xóa domain khỏi whitelist\n"
-                "🔹 `/antilink list` - Xem danh sách whitelist\n"
-                "🔹 `/antilink status` - Xem trạng thái hiện tại\n\n"
+                "🔹 `<prefix>antilink on` - Bật chống link\n"
+                "🔹 `<prefix>antilink off` - Tắt chống link\n"
+                "🔹 `<prefix>antilink add <domain>` - Thêm domain vào whitelist\n"
+                "   Ví dụ: `<prefix>antilink add facebook.com`\n"
+                "🔹 `<prefix>antilink remove <domain>` - Xóa domain khỏi whitelist\n"
+                "🔹 `<prefix>antilink list` - Xem danh sách whitelist\n"
+                "🔹 `<prefix>antilink status` - Xem trạng thái hiện tại\n\n"
                 "💡 **Lưu ý:**\n"
                 "- Khi antilink bật, mọi link sẽ bị xóa trừ link trong whitelist\n"
                 "- Admin bot không bị ảnh hưởng bởi antilink\n"
@@ -77,7 +77,7 @@ def handle_antilink_command(message, message_object, thread_id, thread_type, aut
         if action == "on":
             result = toggle_antilink(thread_id, True)
             client.send(
-                Message(text=f"✅ Đã bật antilink cho nhóm này!\n\n💡 Sử dụng `/antilink add <domain>` để thêm domain được phép."),
+                Message(text=f"✅ Đã bật antilink cho nhóm này!\n\n💡 Sử dụng `<prefix>antilink add <domain>` để thêm domain được phép."),
                 thread_id=thread_id,
                 thread_type=thread_type
             )
@@ -93,7 +93,7 @@ def handle_antilink_command(message, message_object, thread_id, thread_type, aut
         elif action == "add":
             if len(parts) < 3:
                 client.send(
-                    Message(text="⚠️ Vui lòng nhập domain cần thêm!\nVí dụ: `/antilink add facebook.com`"),
+                    Message(text="⚠️ Vui lòng nhập domain cần thêm!\nVí dụ: `<prefix>antilink add facebook.com`"),
                     thread_id=thread_id,
                     thread_type=thread_type
                 )
@@ -110,7 +110,7 @@ def handle_antilink_command(message, message_object, thread_id, thread_type, aut
         elif action == "remove":
             if len(parts) < 3:
                 client.send(
-                    Message(text="⚠️ Vui lòng nhập domain cần xóa!\nVí dụ: `/antilink remove facebook.com`"),
+                    Message(text="⚠️ Vui lòng nhập domain cần xóa!\nVí dụ: `<prefix>antilink remove facebook.com`"),
                     thread_id=thread_id,
                     thread_type=thread_type
                 )
@@ -131,7 +131,7 @@ def handle_antilink_command(message, message_object, thread_id, thread_type, aut
                 for i, domain in enumerate(whitelist, 1):
                     list_text += f"{i}. {domain}\n"
             else:
-                list_text = "📝 Danh sách whitelist trống!\n\n💡 Sử dụng `/antilink add <domain>` để thêm domain."
+                list_text = "📝 Danh sách whitelist trống!\n\n💡 Sử dụng `<prefix>antilink add <domain>` để thêm domain."
             
             client.send(
                 Message(text=list_text),
@@ -152,7 +152,7 @@ def handle_antilink_command(message, message_object, thread_id, thread_type, aut
                 f"🔹 Xóa tin nhắn: {delete_msg}\n"
                 f"🔹 Gửi cảnh báo: {warn_user}\n"
                 f"🔹 Số domain trong whitelist: {whitelist_count}\n\n"
-                f"💡 Dùng `/antilink list` để xem chi tiết whitelist"
+                f"💡 Dùng `<prefix>antilink list` để xem chi tiết whitelist"
             )
             
             client.send(
@@ -163,7 +163,7 @@ def handle_antilink_command(message, message_object, thread_id, thread_type, aut
         
         else:
             client.send(
-                Message(text=f"⚠️ Lệnh không hợp lệ: {action}\n\nDùng `/antilink` để xem hướng dẫn."),
+                Message(text=f"⚠️ Lệnh không hợp lệ: {action}\n\nDùng `<prefix>antilink` để xem hướng dẫn."),
                 thread_id=thread_id,
                 thread_type=thread_type
             )
