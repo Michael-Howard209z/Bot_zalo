@@ -1,9 +1,12 @@
 import json
 import os
 import re
+import time
+import textwrap
 from urllib.parse import urlparse
 from config import ADMIN
 from zlapi.models import Message
+from zlapi.models import Message, MultiMsgStyle, MessageStyle
 from zlapi._threads import ThreadType
 
 # ================== INFO ==================
@@ -12,7 +15,7 @@ des = {
     'credits': "Nguyen Hoang",
     'description': "Chống gửi link trong nhóm (Fix Whitelist)"
 }
-
+# 1486999657390250587
 # ================== CONFIG ==================
 CONFIG_FILE = os.path.join(os.path.dirname(__file__), 'antilink_config.json')
 
@@ -43,7 +46,8 @@ def get_group_settings(thread_id):
         'status': False,
         'whitelist': [],
         'delete_msg': True,
-        'warn_user': True
+        'warn_user': True,
+        'block_user': False
     })
 
 def set_group_settings(thread_id, settings):
@@ -126,6 +130,20 @@ def extract_urls(content):
     # Loại bỏ trùng lặp
     return list(set(valid_urls))
 
+def to_pixel(text):
+    """Chuyển đổi văn bản sang font pixel (Monospace Unicode)"""
+    result = ""
+    for char in text:
+        if 'A' <= char <= 'Z':
+            result += chr(ord(char) + 120367)
+        elif 'a' <= char <= 'z':
+            result += chr(ord(char) + 120361)
+        elif '0' <= char <= '9':
+            result += chr(ord(char) + 120774)
+        else:
+            result += char
+    return result
+
 # ================== MAIN HANDLER ==================
 def handle_antilink(message, message_object, thread_id, thread_type, author_id, client):
     """
@@ -205,16 +223,31 @@ def handle_antilink(message, message_object, thread_id, thread_type, author_id, 
                 except Exception as e:
                     print(f"[ANTILINK] Lỗi khi xóa tin nhắn: {e}")
             
+            # Block user nếu được bật
+            if settings.get('block_user', False):
+                try:
+                    client.blockUsersInGroup(author_id, thread_id)
+                    print(f"[ANTILINK] Đã BLOCK user {author_id} khỏi nhóm {thread_id}")
+                    client.send(
+                        Message(text=f"🚫 Đã chặn thành viên {author_id} khỏi nhóm vì gửi link cấm!"),
+                        thread_id, thread_type
+                    )
+                except Exception as e:
+                    print(f"[ANTILINK] Lỗi khi block user: {e}")
+
             # Gửi cảnh báo nếu được bật
             if settings.get('warn_user', True):
                 try:
-                    warning_text = " Phát hiện gửi link không được phép! Vui lòng đọc kĩ rule nhóm."
+                    raw_text = "CẢNH BÁO \nPhát hiện gửi link cấm!\nVui lòng đọc kỹ nội quy nhóm."
+                    warning_text = to_pixel(raw_text)
                     
-                    client.send(
-                        Message(text=warning_text),
-                        thread_id=thread_id,
-                        thread_type=thread_type
-                    )
+                    # Sử dụng font pixel unicode và màu đỏ
+                    style = MultiMsgStyle([
+                        MessageStyle(offset=0, length=len(warning_text), style="font", size="50", auto_format=False),
+                        MessageStyle(offset=0, length=len(warning_text), style="color", color="#ff0000", auto_format=False)
+                    ])
+                    client.send(Message(text=warning_text, style=style), thread_id, thread_type)
+
                 except Exception as e:
                     print(f"[ANTILINK] Lỗi khi gửi cảnh báo: {e}")
     
@@ -235,6 +268,13 @@ def toggle_antilink(thread_id, status):
     settings['status'] = status
     set_group_settings(thread_id, settings)
     return f" Đã {'bật' if status else 'tắt'} antilink cho nhóm {thread_id}"
+
+def toggle_block_user(thread_id, status):
+    """Bật/tắt tính năng tự động block"""
+    settings = get_group_settings(thread_id)
+    settings['block_user'] = status
+    set_group_settings(thread_id, settings)
+    return f" Đã {'bật' if status else 'tắt'} tính năng tự động BLOCK user gửi link cho nhóm {thread_id}"
 
 def add_to_whitelist(thread_id, domain):
     """Thêm domain vào whitelist"""

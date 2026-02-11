@@ -14,5 +14,15 @@
     "whitelist": [],
     "delete_msg": true,
     "warn_user": false
+  },
+  "1486999657390250587": {
+    "status": true,
+    "whitelist": [
+      "docs.google.com",
+      "drive.google.com"
+    ],
+    "delete_msg": true,
+    "warn_user": true,
+    "block_user": false
   }
 }
