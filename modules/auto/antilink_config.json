@@ -19,7 +19,13 @@
     "status": true,
     "whitelist": [
       "docs.google.com",
-      "drive.google.com"
+      "drive.google.com",
+      "facebook.com",
+      "mega.nz",
+      "vnjpclub.com",
+      "youcan.edu",
+      "youtube.com",
+      "hanka.edu"
     ],
     "delete_msg": true,
     "warn_user": true,
