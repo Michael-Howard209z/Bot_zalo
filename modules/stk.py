@@ -1,110 +1,213 @@
+import requests
+import subprocess
 import json
-import time
 import urllib.parse
-
-from zlapi.models import Message
+import os
+from io import BytesIO
+from PIL import Image, ImageDraw
+from zlapi.models import Message, MultiMsgStyle, MessageStyle
 from zlapi._threads import ThreadType
 
-# ================== INFO ==================
 des = {
-    "version": "4.1.1",
-    "credits": "Nguyen Hoang Dev ✓",
-    "description": "Tạo sticker từ ảnh / gif / video Zalo (FIX zlapi bug)",
+    "version": "6.0.0",
+    "credits": "Nguyen Hoang Dev",
+    "description": "Tạo sticker GIF động từ video/gif (WebP)",
     "power": "Thành viên"
 }
 
-# ================== UTILS ==================
-def fix_zalo_jxl_url(url: str):
-    if not url:
-        return None
-    return (
-        url.replace("/jxl/", "/jpg/")
-           .replace(".jxl", ".jpg")
-    )
-
-
-def detect_media_type(url: str):
-    url = url.lower()
-    if url.endswith(".gif"):
-        return "gif"
-    if any(url.endswith(x) for x in (".jpg", ".jpeg", ".png", ".webp")):
-        return "image"
-    return "video"
-
-
-def extract_zalo_media(message_object):
-    # reply
-    if message_object.quote and message_object.quote.get("attach"):
-        attach = json.loads(message_object.quote["attach"])
-        media = attach.get("href")
-        thumb = attach.get("thumb") or media
-        return (
-            fix_zalo_jxl_url(urllib.parse.unquote(media)),
-            fix_zalo_jxl_url(urllib.parse.unquote(thumb))
-        )
-
-    # direct photo/video
-    content = message_object.content or {}
-    if isinstance(content, dict):
-        media = content.get("href")
-        thumb = content.get("thumb") or media
-        return (
-            fix_zalo_jxl_url(urllib.parse.unquote(media)),
-            fix_zalo_jxl_url(urllib.parse.unquote(thumb))
-        )
-
-    return None, None
-
-
-# ================== COMMAND ==================
 def handle_stk_command(message, message_object, thread_id, thread_type, author_id, client):
+    if message_object.quote:
+        attach = message_object.quote.attach
+        if attach:
+            try:
+                attach_data = json.loads(attach)
+            except json.JSONDecodeError:
+                client.sendMessage(
+                    Message(text="Dữ liệu ảnh không hợp lệ."),
+                    thread_id=thread_id,
+                    thread_type=thread_type
+                )
+                return
 
-    media_url, thumb_url = extract_zalo_media(message_object)
+            file_url = attach_data.get('hdUrl') or attach_data.get('href')
+            if not file_url:
+                client.sendMessage(
+                    Message(text="Không tìm thấy URL ảnh."),
+                    thread_id=thread_id,
+                    thread_type=thread_type
+                )
+                return
 
-    if not media_url:
-        client.replyMessage(
-            Message(text="❌ Reply ảnh / gif / video rồi gõ ?stk"),
-            message_object,
-            thread_id,
-            thread_type
-        )
-        return
+            file_url = file_url.replace("\\/", "/")
+            file_url = urllib.parse.unquote(file_url)
 
-    client.replyMessage(
-        Message(text="⏳ Đang tạo sticker..."),
-        message_object,
-        thread_id,
-        thread_type
-    )
+            # Handle JXL by replacing with JPG
+            if "jxl" in file_url:
+                file_url = file_url.replace("jxl", "jpg")
 
+            file_type = get_file_type(file_url)
+            if file_type == "video":
+                webp_url = convert_mp4_to_webp_and_upload(file_url)
+                if webp_url:
+                    client.send_custom_sticker(
+                        animationImgUrl=webp_url,
+                        staticImgUrl=webp_url,
+                        thread_id=thread_id,
+                        thread_type=thread_type,
+                        width=None,
+                        height=None
+                    )
+                    send_response(client, thread_id, thread_type, "Đã tạo Sticker video thành công!", ttl=30000)
+                    print("Sticker video đã tạo xong và gửi thành công!")
+                else:
+                    send_response(client, thread_id, thread_type, " Không thể tạo sticker video!")
+                    print("❌ Không thể tạo sticker video!")
+            elif file_type == "image":
+                try:
+                    response = requests.get(file_url, stream=True, timeout=15)
+                    response.raise_for_status()
+                    # Validate Content-Type
+                    content_type = response.headers.get("Content-Type", "").lower()
+                    if not content_type.startswith("image/"):
+                        print(f"Không phải file ảnh, Content-Type: {content_type}")
+                        client.sendMessage(
+                            Message(text="File không phải là ảnh hợp lệ."),
+                            thread_id=thread_id,
+                            thread_type=thread_type
+                        )
+                        return
+
+                    # Process image with Pillow
+                    img = Image.open(BytesIO(response.content)).convert("RGBA")
+                    temp_webp = "temp_sticker.webp"
+                    width, height = img.size
+                    # Resize while maintaining aspect ratio
+                    img = img.resize((512, int(512 * height / width)), Image.LANCZOS)
+                    width, height = img.size
+                    mask = Image.new("L", (width, height), 0)
+                    draw = ImageDraw.Draw(mask)
+                    draw.rounded_rectangle((0, 0, width, height), radius=50, fill=255)
+                    img.putalpha(mask)
+                    img.save(temp_webp, format="WEBP", quality=75, lossless=False)
+
+                    # Upload to Catbox
+                    with open(temp_webp, "rb") as f:
+                        files = {'fileToUpload': ('sticker.webp', f, 'image/webp')}
+                        upload_response = requests.post("https://catbox.moe/user/api.php", files=files, data={"reqtype": "fileupload"})
+                    
+                    # Clean up
+                    if os.path.exists(temp_webp):
+                        os.remove(temp_webp)
+
+                    if upload_response.status_code == 200:
+                        webp_url = upload_response.text.strip() + "?creator=NguyenHoangapi"
+                        client.send_custom_sticker(
+                            animationImgUrl=webp_url,
+                            staticImgUrl=webp_url,
+                            thread_id=thread_id,
+                            thread_type=thread_type,
+                            reply=message_object.msgId,
+                            width=None,
+                            height=None
+                        )
+                        send_message = "Đã tạo Sticker ảnh thành công!"
+                        style = MultiMsgStyle([
+                            MessageStyle(offset=0, length=len(send_message), style="font", size="6", auto_format=False),
+                            MessageStyle(offset=0, length=len(send_message), style="bold", auto_format=False)
+                        ])
+                        styled_message = Message(text=send_message, style=style)
+                        client.replyMessage(styled_message, message_object, thread_id, thread_type, ttl=80000)
+                        print(f"Converted and uploaded image: {webp_url}")
+                    else:
+                        print(f"Upload failed: {upload_response.text}")
+                        client.sendMessage(
+                            Message(text="Không thể tải sticker lên!"),
+                            thread_id=thread_id,
+                            thread_type=thread_type
+                        )
+                except Exception as e:
+                    print(f"Lỗi khi chuyển ảnh sang WebP: {e}")
+                    client.sendMessage(
+                        Message(text=f"Lỗi khi tạo sticker: {str(e)}"),
+                        thread_id=thread_id,
+                        thread_type=thread_type
+                    )
+            else:
+                send_response(client, thread_id, thread_type, "Loại file không hỗ trợ!")
+                print("Loại file không hỗ trợ!")
+        else:
+            send_response(client, thread_id, thread_type, "Không có file nào được reply!")
+    else:
+        send_response(client, thread_id, thread_type, "Hãy reply vào ảnh hoặc video cần tạo sticker!")
+
+def get_file_type(url):
     try:
-        cid = int(time.time())
+        response = requests.head(url, allow_redirects=True, timeout=10)
+        content_type = response.headers.get("Content-Type", "").lower()
+        if "image" in content_type:
+            return "image"
+        elif "video" in content_type:
+            return "video"
+        return "unknown"
+    except requests.RequestException as e:
+        print(f"Lỗi xác định loại file: {e}")
+        return "unknown"
 
-        client.send_custom_sticker(
-            staticImgUrl=thumb_url or media_url,
-            animationImgUrl=media_url,
-            thread_id=thread_id,
-            thread_type=thread_type,
-            reply=message_object.msgId,
-            ##width=512,
-            ##height=512,
-            contentId=cid
-        )
+def convert_mp4_to_webp_and_upload(video_url):
+    try:
+        # Download the MP4
+        response = requests.get(video_url, stream=True, timeout=15)
+        response.raise_for_status()
+        temp_mp4 = "temp_video.mp4"
+        temp_webp = "temp_sticker.webp"
+        with open(temp_mp4, "wb") as f:
+            for chunk in response.iter_content(1024):
+                f.write(chunk)
 
+        # Convert MP4 to animated WebP using FFmpeg
+        subprocess.run([
+            "ffmpeg", "-y", "-i", temp_mp4,
+            "-vf", "scale=512:-2",
+            "-c:v", "libwebp_anim",
+            "-loop", "0",
+            "-r", "15",
+            "-an",
+            "-lossless", "0",
+            "-q:v", "75",
+            "-loglevel", "error",
+            temp_webp
+        ], check=True, capture_output=True, text=True)
+
+        # Upload to Catbox
+        with open(temp_webp, "rb") as f:
+            files = {'fileToUpload': ('sticker.webp', f, 'image/webp')}
+            upload_response = requests.post("https://catbox.moe/user/api.php", files=files, data={"reqtype": "fileupload"})
+        
+        # Clean up
+        for file in [temp_mp4, temp_webp]:
+            if os.path.exists(file):
+                os.remove(file)
+
+        if upload_response.status_code == 200:
+            webp_url = upload_response.text.strip() + "?creator=NguyenHoangapi"
+            print(f" Converted and uploaded video: {webp_url}")
+            return webp_url
+        print(f"Upload failed: {upload_response.text}")
+        return None
+    except subprocess.CalledProcessError as e:
+        print(f"FFmpeg error: {e.stderr}")
+        return None
     except Exception as e:
-        # 🔥 FIX zlapi Response.get BUG
-        if "Response" in str(e):
-            return
-        client.replyMessage(
-            Message(text=f"❌ Lỗi tạo sticker: {e}"),
-            message_object,
-            thread_id,
-            thread_type
-        )
+        print(f"Lỗi khi chuyển MP4 sang WebP: {e}")
+        return None
 
+def send_response(client, thread_id, thread_type, text, ttl=10000):
+    style = MultiMsgStyle([
+        MessageStyle(offset=0, length=len(text), style="font", size="10", auto_format=False),
+        MessageStyle(offset=0, length=len(text), style="bold", auto_format=False)
+    ])
+    styled_message = Message(text=text, style=style)
+    client.sendMessage(styled_message, thread_id, thread_type, ttl=ttl)
 
-# ================== REGISTER ==================
 def get_hzlbot():
-    return {
-        "stk": handle_stk_command
-    }
+    return {"stk": handle_stk_command}

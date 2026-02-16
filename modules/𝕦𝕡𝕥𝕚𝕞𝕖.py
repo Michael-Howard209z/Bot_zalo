@@ -17,37 +17,37 @@ def random_color():
     return (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
 
 def add_text_to_image(uptime_text, additional_text):
-    img = Image.open('nen.png')  # Đường dẫn đến ảnh nền
+    img = Image.open('nen.png')  
     draw = ImageDraw.Draw(img)
     
-    font_path = "UTM AvoBold_Italic.ttf"  # Đường dẫn đến font chữ
+    font_path = "UTM AvoBold_Italic.ttf"  
     font_size = 10000
     try:
         font = ImageFont.truetype(font_path, font_size)
     except IOError:
         font = ImageFont.load_default()
     
-    # Chọn màu ngẫu nhiên cho chữ
+   
     fill_color = random_color()
     
-    # Vẽ thông điệp bổ sung ở trên cùng
+   
     additional_bbox = draw.textbbox((0, 0), additional_text, font=font)
     additional_width = additional_bbox[2] - additional_bbox[0]  
     additional_height = additional_bbox[3] - additional_bbox[1]  
 
     additional_x = (img.width - additional_width) / 2  
-    additional_y = 20  # Vị trí cách cạnh trên một khoảng nhỏ
+    additional_y = 20  
 
     draw.text((additional_x, additional_y), additional_text, fill=fill_color, font=font)
 
-    # Vẽ thông điệp uptime ở giữa
+    
     bbox = draw.textbbox((0, 0), uptime_text, font=font)
     text_width = bbox[2] - bbox[0]  
     text_height = bbox[3] - bbox[1]  
 
-    # Tính toán vị trí để canh giữa nội dung uptime
+    
     text_x = (img.width - text_width) / 2  
-    text_y = (img.height - text_height) / 2  # Canh giữa theo chiều dọc
+    text_y = (img.height - text_height) / 2  
 
     draw.text((text_x, text_y), uptime_text, fill=fill_color, font=font)
     

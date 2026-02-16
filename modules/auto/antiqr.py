@@ -47,9 +47,9 @@ def set_group_settings(thread_id, settings):
     config[str(thread_id)] = settings
     save_config(config)
 
-def is_admin(author_id):
+#def is_admin(author_id):
     """Kiểm tra xem user có phải admin không"""
-    return str(author_id) in map(str, ADMIN)
+ #   return str(author_id) in map(str, ADMIN)
 
 def has_qr_code(image_bytes):
     """Kiểm tra xem ảnh có chứa mã QR không"""
@@ -74,11 +74,11 @@ def handle_antiqr(message, message_object, thread_id, thread_type, author_id, cl
             return
 
         # Bỏ qua tin nhắn của admin hoặc của chính bot
-        if is_admin(author_id) or str(author_id) == str(client.uid):
-            if str(author_id) == str(client.uid):
+        #if is_admin(author_id) or str(author_id) == str(client.uid):
+            #if str(author_id) == str(client.uid):
                 # Ghi log khi bot bỏ qua tin nhắn của chính nó
-                print(f"[ANTIQR] Bỏ qua tin nhắn từ chính bot (ID: {author_id}).")
-            return
+                #print(f"[ANTIQR] Bỏ qua tin nhắn từ chính bot (ID: {author_id}).")
+          #  return
 
         image_url = None
 

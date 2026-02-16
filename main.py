@@ -4,7 +4,6 @@ from zlapi import ZaloAPI
 from zlapi.models import Message
 from modules.bot_info import *
 # from modules.da import welcome
-
 import itertools
 import signal
 import sys
@@ -13,7 +12,6 @@ import os
 import time
 import threading
 from colorama import Fore, Style, init
-
 # ================== COLOR ==================
 GRADIENT_COLORS = [
     Fore.LIGHTMAGENTA_EX,
@@ -32,7 +30,6 @@ def gradient_text(text):
     return result + Style.RESET_ALL
 
 init(autoreset=True)
-
 # ================== CLIENT ==================
 class Client(ZaloAPI):
     def __init__(self, api_key, secret_key, imei, session_cookies):
@@ -76,8 +73,7 @@ class Client(ZaloAPI):
                     self, author_id, thread_id, message_object, thread_type, message
                 )
 
-            # Xử lý tin nhắn để chạy Command Handler
-            # Nếu message không phải string (vd: link preview, sticker), gán là chuỗi rỗng để vẫn chạy được global handlers
+
             message_text = message if isinstance(message, str) else ""
             
             if message_text == PREFIX:
@@ -97,7 +93,7 @@ class Client(ZaloAPI):
             )
 
         except KeyboardInterrupt:
-            raise  # ⚠️ KHÔNG NUỐT CTRL+C
+            raise 
         except Exception as e:
             print(f"Lỗi xử lý tin nhắn: {e}")
 
@@ -111,7 +107,6 @@ def cleanup():
         pass
 
 atexit.register(cleanup)
-
 # ================== AUTO RESTART ==================
 def auto_restart(interval_seconds):
     time.sleep(interval_seconds)
@@ -119,7 +114,6 @@ def auto_restart(interval_seconds):
     python = sys.executable
     os.execl(python, python, *sys.argv)
 
-# ================== SIGNAL ==================
 def signal_handler(sig, frame):
     print(f"\n{Fore.RED}{Style.BRIGHT}Nhận Ctrl+C, đang tắt bot...{Style.RESET_ALL}")
     cleanup()
@@ -127,13 +121,11 @@ def signal_handler(sig, frame):
 
 signal.signal(signal.SIGINT, signal_handler)
 signal.signal(signal.SIGTERM, signal_handler)
-
-# ================== MAIN ==================
 if __name__ == "__main__":
     client = Client(API_KEY, SECRET_KEY, IMEI, SESSION_COOKIES)
 
-    # Khởi động thread tự động restart sau mỗi 3 giờ (10800 giây)
-    restart_thread = threading.Thread(target=auto_restart, args=(10800,), daemon=True)
+    # Khởi động thread tự động restart sau mỗi xnxx giờ tính theo giây
+    restart_thread = threading.Thread(target=auto_restart, args=(3600,), daemon=True)
     restart_thread.start()
 
     try:

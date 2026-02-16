@@ -61,5 +61,5 @@ def handle_weather_command(message, message_object, thread_id, thread_type, auth
 
 def get_hzlbot():
     return {
-        'thời tiết': handle_weather_command
+        'thoitiet': handle_weather_command
     }

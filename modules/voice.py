@@ -60,7 +60,7 @@ def process_message(message_object, thread_id, thread_type, author_id, client):
     content = message_object.content.strip()
     command_parts = content.split(maxsplit=1)
     command = command_parts[0].lower()
-    commands = get_mitaizl()
+    commands = get_hzlbot()
     
     if command in commands:
         commands[command](message_object, thread_id, thread_type, author_id, client)

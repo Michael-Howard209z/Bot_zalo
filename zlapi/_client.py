@@ -3597,7 +3597,8 @@ class ZaloAPI(object):
         
         payload["params"] = self._encode(payload["params"])
         
-        data = self._post(url, params=params, data=payload)
+        response = self._post(url, params=params, data=payload)
+        data = response.json()
         results = data.get("data") if data.get("error_code") == 0 else None
         if results:
             results = self._decode(results)
@@ -4538,3 +4539,7 @@ def sendTodo(self, target_id, content, mid, author_id, thread_type, thread_id=No
         error_code = data.get("error_code")
         error_message = data.get("error_message") or data.get("data")
         raise ZaloAPIException(f"Error #{error_code} when sending todo: {error_message}")
+        raise ZaloAPIException(f"Error #{error_code} when sending todo: {error_message}")
+        error_message = data.get("error_message") or data.get("data")
+        raise ZaloAPIException(f"Error #{error_code} when sending todo: {error_message}")
+ 

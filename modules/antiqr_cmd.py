@@ -6,7 +6,7 @@ from modules.bot_info import is_admin
 # ================== INFO ==================
 des = {
     "version": "1.0.0",
-    "credits": "Gemini Code Assist",
+    "credits": "Nguyen Hoang",
     "description": "Quản lý chống gửi ảnh QR trong nhóm",
     "power": "Quản trị viên"
 }

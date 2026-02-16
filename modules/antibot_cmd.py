@@ -1,12 +1,12 @@
 from zlapi.models import Message
 from zlapi._threads import ThreadType
-from modules.auto.antibot import get_group_settings, set_group_settings
+from modules.TEMP.antibot import get_group_settings, set_group_settings
 from modules.bot_info import is_admin
 
 # ================== INFO ==================
 des = {
     "version": "1.0.0",
-    "credits": "Gemini Code Assist",
+    "credits": "Nguyen Hoang",
     "description": "Quản lý chống bot khác trong nhóm",
     "power": "Quản trị viên"
 }

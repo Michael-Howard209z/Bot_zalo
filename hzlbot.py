@@ -113,14 +113,12 @@ class CommandHandler:
         return global_handlers
 
     def handle_command(self, message, author_id, message_object, thread_id, thread_type):
-        # Chạy global handlers trước (chạy với mọi tin nhắn)
         for handler in self.global_handlers:
             try:
                 handler(message, message_object, thread_id, thread_type, author_id, self.client)
             except Exception as e:
                 print(f"{BOLD}{RED}[GLOBAL HANDLER ERROR] {e}{RESET}")
-        
-        # Xử lý các lệnh không cần prefix
+    
         auto_command_handler = self.auto_hzlbot.get(message.lower())
         if auto_command_handler:
             auto_command_handler(message, message_object, thread_id, thread_type, author_id, self.client)
@@ -128,7 +126,6 @@ class CommandHandler:
         
         if not message.startswith(PREFIX):
             return
-#xử lí lệnh càn prefix
         command_name = message[len(PREFIX):].split(' ')[0].lower()
         command_handler = self.hzlbot.get(command_name)
 

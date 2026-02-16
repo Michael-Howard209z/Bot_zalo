@@ -25,6 +25,12 @@ sticker/
 sticker/*
 /sticker/*
 /TEMP/
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.mp4
+*.webp
 
 # ===== IDE =====
 .vscode/

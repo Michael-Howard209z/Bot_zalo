@@ -8,3 +8,10 @@ munch
 telethon
 gtts
 pillow
+websockets
+aiohttp
+dotenv
+pyzbar
+yt-dlp
+zbar
+emoji
