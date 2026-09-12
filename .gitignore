@@ -1,0 +1,47 @@
+# ===== ENV / SECRET =====
+.env
+config.py
+client_id.txt
+zlapi_session.json
+setting.json
+
+# ===== OS FILE =====
+.DS_Store
+Thumbs.db
+
+# ===== PYTHON =====
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.bak
+
+
+# ===== TEMP / CACHE =====
+TEMP/
+cache/
+.cache/
+sticker/
+sticker/*
+/sticker/*
+/TEMP/
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.mp4
+*.webp
+
+# ===== IDE =====
+.vscode/
+
+# ===== LOG =====
+*.log
+modules/sticker_cache/
+
+modules/__pycache__/
+zlapi/__pycache__/_client.cpython-312.pyc
+modules/__pycache__/autosend.cpython-312.pyc
+modules/__pycache__/cardinfo.cpython-312.pyc
+# ===== ZALO EXTENSIONs =====
+zlapi-extension/
