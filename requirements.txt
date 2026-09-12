@@ -1,0 +1,17 @@
+colorama
+requests
+pystyle
+
+bs4
+pycryptodome
+munch
+telethon
+gtts
+pillow
+websockets
+aiohttp
+dotenv
+pyzbar
+yt-dlp
+
+emoji

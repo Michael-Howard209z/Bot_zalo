@@ -1,0 +1,1202 @@
+[
+    {
+        "msgId": "6052852381051",
+        "uidFrom": "4309092261445242579",
+        "cliMsgId": "1732109457579",
+        "msgType": "webchat",
+        "content": {},
+        "params": null,
+        "time": "2024-11-20 20:30:58.f",
+        "id": "",
+        "catId": ""
+    },
+    {
+        "msgId": "6052852774324",
+        "uidFrom": "0",
+        "cliMsgId": "1732109464358",
+        "msgType": "chat.sticker",
+        "content": {
+            "id": 22192,
+            "catId": 10343,
+            "type": 3,
+            "extInfo": null
+        },
+        "params": null,
+        "time": "2024-11-20 20:31:04.f",
+        "id": 22192,
+        "catId": 10343
+    },
+    {
+        "msgId": "6052852854555",
+        "uidFrom": "7932574206711103753",
+        "cliMsgId": "1732109468737",
+        "msgType": "webchat",
+        "content": {},
+        "params": null,
+        "time": "2024-11-20 20:31:05.f",
+        "id": "",
+        "catId": ""
+    },
+    {
+        "msgId": "6052852866103",
+        "uidFrom": "0",
+        "cliMsgId": "1732109466072",
+        "msgType": "webchat",
+        "content": {},
+        "params": null,
+        "time": "2024-11-20 20:31:06.f",
+        "id": "",
+        "catId": ""
+    },
+    {
+        "msgId": "6052853208122",
+        "uidFrom": "7932574206711103753",
+        "cliMsgId": "1732109474714",
+        "msgType": "webchat",
+        "content": {},
+        "params": null,
+        "time": "2024-11-20 20:31:11.f",
+        "id": "",
+        "catId": ""
+    },
+    {
+        "msgId": "6052853474179",
+        "uidFrom": "0",
+        "cliMsgId": "1732109475475",
+        "msgType": "chat.sticker",
+        "content": {
+            "id": 22196,
+            "catId": 10343,
+            "type": 3,
+            "extInfo": null
+        },
+        "params": null,
+        "time": "2024-11-20 20:31:15.f",
+        "id": 22196,
+        "catId": 10343
+    },
+    {
+        "msgId": "6052853568221",
+        "uidFrom": "0",
+        "cliMsgId": "1732109477297",
+        "msgType": "webchat",
+        "content": {},
+        "params": null,
+        "time": "2024-11-20 20:31:17.f",
+        "id": "",
+        "catId": ""
+    },
+    {
+        "msgId": "6052853975080",
+        "uidFrom": "0",
+        "cliMsgId": "1732109482751",
+        "msgType": "chat.video.msg",
+        "content": {
+            "title": "",
+            "description": "",
+            "href": "https://f123-zvc.dlmd.me/gr/d625d7c47d8890d6c999/4899815138699912583",
+            "thumb": "https://f48-zpg-r.zdn.vn/6826122424694389158/3e909ba40a4fb111e85e.jpg",
+            "childnumber": 0,
+            "action": "",
+            "params": "{\"duration\":15000,\"is_group_layout\":0,\"video_original_width\":576,\"video_original_height\":1024,\"video_width\":576,\"video_height\":1024,\"video_rotation\":0,\"fileSize\":725736,\"isHD\":0}",
+            "type": ""
+        },
+        "params": null,
+        "time": "2024-11-20 20:31:23.f",
+        "id": "",
+        "catId": ""
+    },
+    {
+        "msgId": "6052854054380",
+        "uidFrom": "0",
+        "cliMsgId": "1732109485059",
+        "msgType": "webchat",
+        "content": {},
+        "params": null,
+        "time": "2024-11-20 20:31:25.f",
+        "id": "",
+        "catId": ""
+    },
+    {
+        "msgId": "6052854087305",
+        "uidFrom": "0",
+        "cliMsgId": "1732109485423",
+        "msgType": "chat.video.msg",
+        "content": {
+            "title": "",
+            "description": "",
+            "href": "https://f123-zvc.dlmd.me/gr/d625d7c47d8890d6c999/4899815138699912583",
+            "thumb": "https://f48-zpg-r.zdn.vn/6826122424694389158/3e909ba40a4fb111e85e.jpg",
+            "childnumber": 0,
+            "action": "",
+            "params": "{\"duration\":15000,\"video_height\":1024,\"fileSize\":0,\"video_width\":576}",
+            "type": ""
+        },
+        "params": null,
+        "time": "2024-11-20 20:31:25.f",
+        "id": "",
+        "catId": ""
+    },
+    {
+        "msgId": "6052854303959",
+        "uidFrom": "0",
+        "cliMsgId": "1732109488294",
+        "msgType": "chat.photo",
+        "content": {
+            "title": "",
+            "description": "",
+            "href": "https://f56-zpg-r.zdn.vn/jpg/4208974371335276862/4091f71e66f5ddab84e4.jpg",
+            "thumb": "https://f56-zpg-r.zdn.vn/jpg/4208974371335276862/4091f71e66f5ddab84e4.jpg",
+            "childnumber": 0,
+            "action": "",
+            "params": "{\"width\":859,\"height\":1908,\"is_group_layout\":0,\"contentId\":\"1000084172\",\"convertible\":\"jxl\"}",
+            "type": ""
+        },
+        "params": null,
+        "time": "2024-11-20 20:31:28.f",
+        "id": "",
+        "catId": ""
+    },
+    {
+        "msgId": "6052854407290",
+        "uidFrom": "0",
+        "cliMsgId": "1732109490839",
+        "msgType": "webchat",
+        "content": {},
+        "params": null,
+        "time": "2024-11-20 20:31:31.f",
+        "id": "",
+        "catId": ""
+    },
+    {
+        "msgId": "6052854464331",
+        "uidFrom": "0",
+        "cliMsgId": "1732109491021",
+        "msgType": "chat.photo",
+        "content": {
+            "title": "",
+            "description": "",
+            "href": "https://f56-zpg-r.zdn.vn/335331497235077147/cbb04d8add61663f3f70.jpg",
+            "thumb": "https://t-f56-zpg-r.zdn.vn/480/335331497235077147/cbb04d8add61663f3f70.jpg",
+            "childnumber": 0,
+            "action": "",
+            "params": "{\"sendSource\":1,\"fileSize\":247671,\"thumbSize\":53932,\"width\":859,\"convertible\":\"jxl\",\"hd\":\"https:\\/\\/b-f56-zpg-r.zdn.vn\\/335331497235077147\\/cbb04d8add61663f3f70.jpg\",\"hdSize\":344622,\"height\":1908}",
+            "type": ""
+        },
+        "params": null,
+        "time": "2024-11-20 20:31:31.f",
+        "id": "",
+        "catId": ""
+    },
+    {
+        "msgId": "6052854566345",
+        "uidFrom": "0",
+        "cliMsgId": "1732109492735",
+        "msgType": "chat.sticker",
+        "content": {
+            "id": 22196,
+            "catId": 10343,
+            "type": 3,
+            "extInfo": null
+        },
+        "params": null,
+        "time": "2024-11-20 20:31:32.f",
+        "id": 22196,
+        "catId": 10343
+    },
+    {
+        "msgId": "6052854638333",
+        "uidFrom": "0",
+        "cliMsgId": "1732109494491",
+        "msgType": "webchat",
+        "content": {},
+        "params": null,
+        "time": "2024-11-20 20:31:34.f",
+        "id": "",
+        "catId": ""
+    },
+    {
+        "msgId": "6052854843098",
+        "uidFrom": "0",
+        "cliMsgId": "1732109497111",
+        "msgType": "chat.sticker",
+        "content": {
+            "id": 22196,
+            "catId": 10343,
+            "type": 3,
+            "extInfo": null
+        },
+        "params": null,
+        "time": "2024-11-20 20:31:37.f",
+        "id": 22196,
+        "catId": 10343
+    },
+    {
+        "msgId": "6052854932306",
+        "uidFrom": "0",
+        "cliMsgId": "1732109498746",
+        "msgType": "webchat",
+        "content": {},
+        "params": null,
+        "time": "2024-11-20 20:31:38.f",
+        "id": "",
+        "catId": ""
+    },
+    {
+        "msgId": "6052864006482",
+        "uidFrom": "5937462608780283257",
+        "cliMsgId": "1732109643297",
+        "msgType": "webchat",
+        "content": {},
+        "params": null,
+        "time": "2024-11-20 20:34:06.f",
+        "id": "",
+        "catId": ""
+    },
+    {
+        "msgId": "6052864036462",
+        "uidFrom": "8547619015101452416",
+        "cliMsgId": "1732109643783",
+        "msgType": "webchat",
+        "content": {},
+        "params": null,
+        "time": "2024-11-20 20:34:06.f",
+        "id": "",
+        "catId": ""
+    },
+    {
+        "msgId": "6052864346830",
+        "uidFrom": "0",
+        "cliMsgId": "1732109648855",
+        "msgType": "chat.sticker",
+        "content": {
+            "id": 22192,
+            "catId": 10343,
+            "type": 3,
+            "extInfo": null
+        },
+        "params": null,
+        "time": "2024-11-20 20:34:09.f",
+        "id": 22192,
+        "catId": 10343
+    },
+    {
+        "msgId": "6052864409475",
+        "uidFrom": "4372989232601131696",
+        "cliMsgId": "1732109647649",
+        "msgType": "chat.video.msg",
+        "content": {
+            "title": "",
+            "description": "",
+            "href": "https://f119-zvc.dlmd.me/gr/6ab609f173bd9ee3c7ac/3995980200260292114",
+            "thumb": "https://f48-zpg-r.zdn.vn/8895228115753884865/32f41d3079dac2849bcb.jpg",
+            "childnumber": 0,
+            "action": "",
+            "params": "{\"duration\":20000,\"is_group_layout\":0,\"video_original_width\":720,\"video_original_height\":1600,\"video_width\":480,\"video_height\":1068,\"video_rotation\":0,\"fileSize\":1486557,\"isHD\":0}",
+            "type": ""
+        },
+        "params": null,
+        "time": "2024-11-20 20:34:10.f",
+        "id": "",
+        "catId": ""
+    },
+    {
+        "msgId": "6052865969578",
+        "uidFrom": "6983574379483722741",
+        "cliMsgId": "1732109675245",
+        "msgType": "webchat",
+        "content": {},
+        "params": null,
+        "time": "2024-11-20 20:34:43.f",
+        "id": "",
+        "catId": ""
+    },
+    {
+        "msgId": "6052866474935",
+        "uidFrom": "3301121500938836944",
+        "cliMsgId": "1732109683171",
+        "msgType": "webchat",
+        "content": {},
+        "params": null,
+        "time": "2024-11-20 20:34:43.f",
+        "id": "",
+        "catId": ""
+    },
+    {
+        "msgId": "6052866456861",
+        "uidFrom": "4372989232601131696",
+        "cliMsgId": "1732109666506",
+        "msgType": "chat.video.msg",
+        "content": {
+            "title": "Ai mua tim tik tok giá rẻ ib tui",
+            "description": "",
+            "href": "https://f141-zvc.dlmd.me/gr/7dfc99f733bbdee587aa/7278294111107933897",
+            "thumb": "https://f48-zpg-r.zdn.vn/8895228115753884865/32f41d3079dac2849bcb.jpg",
+            "childnumber": 0,
+            "action": "",
+            "params": "{\"duration\":20000,\"is_group_layout\":0,\"video_original_width\":720,\"video_original_height\":1600,\"video_width\":480,\"video_height\":1068,\"video_rotation\":0,\"fileSize\":1486557,\"isHD\":0}",
+            "type": ""
+        },
+        "params": null,
+        "time": "2024-11-20 20:34:43.f",
+        "id": "",
+        "catId": ""
+    },
+    {
+        "msgId": "6052866570700",
+        "uidFrom": "3301121500938836944",
+        "cliMsgId": "1732109684770",
+        "msgType": "webchat",
+        "content": {},
+        "params": null,
+        "time": "2024-11-20 20:34:45.f",
+        "id": "",
+        "catId": ""
+    },
+    {
+        "msgId": "6052866747822",
+        "uidFrom": "0",
+        "cliMsgId": "1732109687658",
+        "msgType": "chat.sticker",
+        "content": {
+            "id": 22192,
+            "catId": 10343,
+            "type": 3,
+            "extInfo": null
+        },
+        "params": null,
+        "time": "2024-11-20 20:34:48.f",
+        "id": 22192,
+        "catId": 10343
+    },
+    {
+        "msgId": "6052866803995",
+        "uidFrom": "4249989173569993189",
+        "cliMsgId": "1732109688559",
+        "msgType": "webchat",
+        "content": {},
+        "params": null,
+        "time": "2024-11-20 20:34:49.f",
+        "id": "",
+        "catId": ""
+    },
+    {
+        "msgId": "6052866887087",
+        "uidFrom": "4249989173569993189",
+        "cliMsgId": "1732109689896",
+        "msgType": "webchat",
+        "content": {},
+        "params": null,
+        "time": "2024-11-20 20:34:50.f",
+        "id": "",
+        "catId": ""
+    },
+    {
+        "msgId": "6052867228635",
+        "uidFrom": "4249989173569993189",
+        "cliMsgId": "1732109695151",
+        "msgType": "share.file",
+        "content": {
+            "title": "welcome.py",
+            "description": "",
+            "href": "https://fg42.dlfl.me/9594afb2e73649681027/73572156931126065",
+            "thumb": "",
+            "childnumber": 0,
+            "action": "",
+            "params": "{\"fileSize\":\"5363\",\"checksum\":\"cb174589da4d7fa811413b581960aca7\",\"fileExt\":\"py\",\"tWidth\":0,\"tHeight\":0,\"duration\":0,\"fType\":1,\"fdata\":\"\"}",
+            "type": ""
+        },
+        "params": null,
+        "time": "2024-11-20 20:34:56.f",
+        "id": "",
+        "catId": ""
+    },
+    {
+        "msgId": "6052867908607",
+        "uidFrom": "0",
+        "cliMsgId": "1732109705960",
+        "msgType": "chat.photo",
+        "content": {
+            "title": "",
+            "description": "",
+            "href": "https://f56-zpg-r.zdn.vn/jpg/4208974371335276862/4091f71e66f5ddab84e4.jpg",
+            "thumb": "https://f56-zpg-r.zdn.vn/jpg/4208974371335276862/4091f71e66f5ddab84e4.jpg",
+            "childnumber": 0,
+            "action": "",
+            "params": "{\"width\":859,\"height\":1908,\"is_group_layout\":0,\"contentId\":\"1000084172\",\"convertible\":\"jxl\"}",
+            "type": ""
+        },
+        "params": null,
+        "time": "2024-11-20 20:35:06.f",
+        "id": "",
+        "catId": ""
+    },
+    {
+        "msgId": "6052868154098",
+        "uidFrom": "0",
+        "cliMsgId": "1732109710815",
+        "msgType": "chat.photo",
+        "content": {
+            "title": "",
+            "description": "",
+            "href": "https://f66-zpg-r.zdn.vn/7567110215208216364/f52b7960198aa2d4fb9b.jpg",
+            "thumb": "https://t-f66-zpg-r.zdn.vn/480/7567110215208216364/f52b7960198aa2d4fb9b.jpg",
+            "childnumber": 0,
+            "action": "",
+            "params": "{\"sendSource\":1,\"fileSize\":247671,\"thumbSize\":53932,\"width\":859,\"hd\":\"https:\\/\\/b-f66-zpg-r.zdn.vn\\/7567110215208216364\\/f52b7960198aa2d4fb9b.jpg\",\"hdSize\":344622,\"height\":1908}",
+            "type": ""
+        },
+        "params": null,
+        "time": "2024-11-20 20:35:12.f",
+        "id": "",
+        "catId": ""
+    },
+    {
+        "msgId": "6052868437529",
+        "uidFrom": "1856828825399665883",
+        "cliMsgId": "1732109714357",
+        "msgType": "chat.photo",
+        "content": {
+            "title": "",
+            "description": "",
+            "href": "https://f52-zpg-r.zdn.vn/jpg/8194119083193862049/b4c9268a4760fc3ea571.jpg",
+            "thumb": "https://f52-zpg-r.zdn.vn/jpg/8194119083193862049/b4c9268a4760fc3ea571.jpg",
+            "childnumber": 0,
+            "action": "",
+            "params": "{\"height\":2048,\"thumb_width\":256,\"thumb_height\":341,\"tracking\":{\"subsource\":\"0\",\"source\":0},\"hd\":\"https:\\/\\/f52-zpg-r.zdn.vn\\/jpg\\/8194119083193862049\\/b4c9268a4760fc3ea571.jpg\",\"width\":1536,\"convertible\":\"jxl\"}",
+            "type": ""
+        },
+        "params": null,
+        "time": "2024-11-20 20:35:15.f",
+        "id": "",
+        "catId": ""
+    },
+    {
+        "msgId": "6052869415827",
+        "uidFrom": "1856828825399665883",
+        "cliMsgId": "1732109730609",
+        "msgType": "webchat",
+        "content": {},
+        "params": null,
+        "time": "2024-11-20 20:35:31.f",
+        "id": "",
+        "catId": ""
+    },
+    {
+        "msgId": "6052870223122",
+        "uidFrom": "1311773740162244395",
+        "cliMsgId": "1732109744211",
+        "msgType": "chat.photo",
+        "content": {
+            "title": "Chào Mừng Bạn Đã Gia Nhập\n🩴 Bot Zép Lào",
+            "description": "",
+            "href": "https://f65-zpg-r.zdn.vn/3564128226453381551/e0f196aae840531e0a51.jpg",
+            "thumb": "https://t-f65-zpg-r.zdn.vn/480/3564128226453381551/e0f196aae840531e0a51.jpg",
+            "childnumber": 0,
+            "action": "",
+            "params": "{\"width\":1000,\"convertible\":\"jxl\",\"hd\":\"https:\\/\\/b-f65-zpg-r.zdn.vn\\/3564128226453381551\\/e0f196aae840531e0a51.jpg\",\"hdSize\":78727,\"height\":300}",
+            "type": ""
+        },
+        "params": null,
+        "time": "2024-11-20 20:35:44.f",
+        "id": "",
+        "catId": ""
+    },
+    {
+        "msgId": "6052870284485",
+        "uidFrom": "6915727053012099046",
+        "cliMsgId": "1732109745803",
+        "msgType": "webchat",
+        "content": {
+            "title": "[PROJECT NOTIFICATION GROUP ]\n> Chào mừng: Hoàng Phúc\n> Bạn là thành viên thứ: 210\n> Đã tham gia nhóm: 🩴 Bot Zép Lào.",
+            "description": "",
+            "href": "",
+            "thumb": "",
+            "childnumber": 0,
+            "action": "rtf",
+            "params": "{\"styles\": [{\"start\": 0, \"len\": 39, \"st\": \"c_FFff00\"}, {\"start\": 39, \"len\": 39, \"st\": \"c_F0FFFF\"}, {\"start\": 78, \"len\": 39, \"st\": \"c_FF9900\"}, {\"start\": 0, \"len\": 117, \"st\": \"f_13\"}], \"ver\": 0}",
+            "type": ""
+        },
+        "params": null,
+        "time": "2024-11-20 20:35:45.f",
+        "id": "",
+        "catId": ""
+    },
+    {
+        "msgId": "6052870337299",
+        "uidFrom": "1856828825399665883",
+        "cliMsgId": "1732109745189",
+        "msgType": "chat.photo",
+        "content": {
+            "title": "@Hoàng Phúc",
+            "description": "",
+            "href": "https://f54-zpg-r.zdn.vn/6314390844317150084/608932ad4c47f719ae56.jpg",
+            "thumb": "https://t-f54-zpg-r.zdn.vn/480/6314390844317150084/608932ad4c47f719ae56.jpg",
+            "childnumber": 0,
+            "action": "",
+            "params": "{\"sendSource\":1,\"fileSize\":247671,\"thumbSize\":53932,\"width\":1000,\"convertible\":\"jxl\",\"hd\":\"https:\\/\\/b-f54-zpg-r.zdn.vn\\/6314390844317150084\\/608932ad4c47f719ae56.jpg\",\"hdSize\":344622,\"height\":300}",
+            "type": ""
+        },
+        "params": null,
+        "time": "2024-11-20 20:35:46.f",
+        "id": "",
+        "catId": ""
+    },
+    {
+        "msgId": "6052870567940",
+        "uidFrom": "1118940737088942488",
+        "cliMsgId": "1732109748767",
+        "msgType": "chat.recommended",
+        "content": {
+            "title": "Hoàng Phúc",
+            "description": "{\"qrCodeUrl\":\"https:\\/\\/s120-ava-talk.zadn.vn\\/c\\/5\\/8\\/9\\/5\\/120\\/38d695eebb57817256a3ad0eb6ed2a1f.jpg\"}",
+            "href": "www.zaloapp.com",
+            "thumb": "https://s120.avatar.talk.zdn.vn/c/5/8/9/5/120/38d695eebb57817256a3ad0eb6ed2a1f.jpg",
+            "childnumber": 0,
+            "action": "recommened.user",
+            "params": "6983574379483722741",
+            "type": ""
+        },
+        "params": null,
+        "time": "2024-11-20 20:35:50.f",
+        "id": "",
+        "catId": ""
+    },
+    {
+        "msgId": "6052871119544",
+        "uidFrom": "4309092261445242579",
+        "cliMsgId": "1732109757119",
+        "msgType": "webchat",
+        "content": {},
+        "params": null,
+        "time": "2024-11-20 20:35:59.f",
+        "id": "",
+        "catId": ""
+    },
+    {
+        "msgId": "6052871119518",
+        "uidFrom": "4309092261445242579",
+        "cliMsgId": "1732109757179",
+        "msgType": "webchat",
+        "content": {},
+        "params": null,
+        "time": "2024-11-20 20:35:59.f",
+        "id": "",
+        "catId": ""
+    },
+    {
+        "msgId": "6052871119500",
+        "uidFrom": "4309092261445242579",
+        "cliMsgId": "1732109757127",
+        "msgType": "webchat",
+        "content": {},
+        "params": null,
+        "time": "2024-11-20 20:35:59.f",
+        "id": "",
+        "catId": ""
+    },
+    {
+        "msgId": "6052871281926",
+        "uidFrom": "7648839908887704889",
+        "cliMsgId": "1732109760676",
+        "msgType": "webchat",
+        "content": {},
+        "params": null,
+        "time": "2024-11-20 20:36:02.f",
+        "id": "",
+        "catId": ""
+    },
+    {
+        "msgId": "6052871557346",
+        "uidFrom": "4436320963586249871",
+        "cliMsgId": "1732109764959",
+        "msgType": "webchat",
+        "content": {},
+        "params": null,
+        "time": "2024-11-20 20:36:05.f",
+        "id": "",
+        "catId": ""
+    },
+    {
+        "msgId": "6052872349601",
+        "uidFrom": "0",
+        "cliMsgId": "1732109777817",
+        "msgType": "webchat",
+        "content": {},
+        "params": null,
+        "time": "2024-11-20 20:36:19.f",
+        "id": "",
+        "catId": ""
+    },
+    {
+        "msgId": "6052878199729",
+        "uidFrom": "7648839908887704889",
+        "cliMsgId": "1732109873654",
+        "msgType": "webchat",
+        "content": {},
+        "params": null,
+        "time": "2024-11-20 20:37:54.f",
+        "id": "",
+        "catId": ""
+    },
+    {
+        "msgId": "6052878503865",
+        "uidFrom": "3516597028217423058",
+        "cliMsgId": "1732109878649",
+        "msgType": "webchat",
+        "content": {},
+        "params": null,
+        "time": "2024-11-20 20:37:59.f",
+        "id": "",
+        "catId": ""
+    },
+    {
+        "msgId": "6052878675223",
+        "uidFrom": "1910179750926049693",
+        "cliMsgId": "1732109881394",
+        "msgType": "webchat",
+        "content": {},
+        "params": null,
+        "time": "2024-11-20 20:38:02.f",
+        "id": "",
+        "catId": ""
+    },
+    {
+        "msgId": "6052878804977",
+        "uidFrom": "0",
+        "cliMsgId": "1732109883534",
+        "msgType": "chat.sticker",
+        "content": {
+            "id": 22201,
+            "catId": 10343,
+            "type": 3,
+            "extInfo": null
+        },
+        "params": null,
+        "time": "2024-11-20 20:38:04.f",
+        "id": 22201,
+        "catId": 10343
+    },
+    {
+        "msgId": "6052878906300",
+        "uidFrom": "7212577183085364487",
+        "cliMsgId": "1732109885195",
+        "msgType": "webchat",
+        "content": {},
+        "params": null,
+        "time": "2024-11-20 20:38:05.f",
+        "id": "",
+        "catId": ""
+    },
+    {
+        "msgId": "6052878969435",
+        "uidFrom": "4436320963586249871",
+        "cliMsgId": "1732109886255",
+        "msgType": "webchat",
+        "content": {},
+        "params": null,
+        "time": "2024-11-20 20:38:07.f",
+        "id": "",
+        "catId": ""
+    },
+    {
+        "msgId": "6052879030395",
+        "uidFrom": "301252534789559089",
+        "cliMsgId": "1732109887260",
+        "msgType": "webchat",
+        "content": {},
+        "params": null,
+        "time": "2024-11-20 20:38:08.f",
+        "id": "",
+        "catId": ""
+    },
+    {
+        "msgId": "6052879014736",
+        "uidFrom": "0",
+        "cliMsgId": "1732109887314",
+        "msgType": "webchat",
+        "content": {},
+        "params": null,
+        "time": "2024-11-20 20:38:08.f",
+        "id": "",
+        "catId": ""
+    },
+    {
+        "msgId": "6052879136819",
+        "uidFrom": "3301121500938836944",
+        "cliMsgId": "1732109888926",
+        "msgType": "webchat",
+        "content": {},
+        "params": null,
+        "time": "2024-11-20 20:38:09.f",
+        "id": "",
+        "catId": ""
+    },
+    {
+        "msgId": "6052879118852",
+        "uidFrom": "7212577183085364487",
+        "cliMsgId": "1732109888678",
+        "msgType": "webchat",
+        "content": {},
+        "params": null,
+        "time": "2024-11-20 20:38:09.f",
+        "id": "",
+        "catId": ""
+    },
+    {
+        "msgId": "6052879207643",
+        "uidFrom": "0",
+        "cliMsgId": "1732109890167",
+        "msgType": "chat.sticker",
+        "content": {
+            "id": 22207,
+            "catId": 10343,
+            "type": 3,
+            "extInfo": null
+        },
+        "params": null,
+        "time": "2024-11-20 20:38:10.f",
+        "id": 22207,
+        "catId": 10343
+    },
+    {
+        "msgId": "6052879193098",
+        "uidFrom": "301252534789559089",
+        "cliMsgId": "1732109889921",
+        "msgType": "webchat",
+        "content": {},
+        "params": null,
+        "time": "2024-11-20 20:38:10.f",
+        "id": "",
+        "catId": ""
+    },
+    {
+        "msgId": "6052879373652",
+        "uidFrom": "0",
+        "cliMsgId": "1732109893304",
+        "msgType": "webchat",
+        "content": {},
+        "params": null,
+        "time": "2024-11-20 20:38:14.f",
+        "id": "",
+        "catId": ""
+    },
+    {
+        "msgId": "6052879542583",
+        "uidFrom": "0",
+        "cliMsgId": "1732109895617",
+        "msgType": "chat.sticker",
+        "content": {
+            "id": 3,
+            "catId": 0,
+            "type": 2,
+            "extInfo": null
+        },
+        "params": null,
+        "time": "2024-11-20 20:38:16.f",
+        "id": 3,
+        "catId": 0
+    },
+    {
+        "msgId": "6052879888418",
+        "uidFrom": "0",
+        "cliMsgId": "1732109901208",
+        "msgType": "chat.sticker",
+        "content": {
+            "id": 20,
+            "catId": 0,
+            "type": 2,
+            "extInfo": null
+        },
+        "params": null,
+        "time": "2024-11-20 20:38:21.f",
+        "id": 20,
+        "catId": 0
+    },
+    {
+        "msgId": "6052880003114",
+        "uidFrom": "1311773740162244395",
+        "cliMsgId": "1732109903607",
+        "msgType": "chat.voice",
+        "content": {
+            "title": "",
+            "description": "",
+            "href": "https://tmpfiles.org/dl/16071426/image.webp",
+            "thumb": "",
+            "childnumber": 0,
+            "action": "",
+            "params": "{\"fileSize\":6208257,\"m4a\":\"https:\\/\\/tmpfiles.org\\/dl\\/16071426\\/image.webp\"}",
+            "type": ""
+        },
+        "params": null,
+        "time": "2024-11-20 20:38:23.f",
+        "id": "",
+        "catId": ""
+    },
+    {
+        "msgId": "6052880037166",
+        "uidFrom": "1275320406687636141",
+        "cliMsgId": "1732109903299",
+        "msgType": "webchat",
+        "content": {},
+        "params": null,
+        "time": "2024-11-20 20:38:25.f",
+        "id": "",
+        "catId": ""
+    },
+    {
+        "msgId": "6052880386388",
+        "uidFrom": "0",
+        "cliMsgId": "1732109909272",
+        "msgType": "chat.sticker",
+        "content": {
+            "id": 22196,
+            "catId": 10343,
+            "type": 3,
+            "extInfo": null
+        },
+        "params": null,
+        "time": "2024-11-20 20:38:30.f",
+        "id": 22196,
+        "catId": 10343
+    },
+    {
+        "msgId": "6052880713837",
+        "uidFrom": "1856828825399665883",
+        "cliMsgId": "1732109914619",
+        "msgType": "webchat",
+        "content": {},
+        "params": null,
+        "time": "2024-11-20 20:38:35.f",
+        "id": "",
+        "catId": ""
+    },
+    {
+        "msgId": "6052880752767",
+        "uidFrom": "0",
+        "cliMsgId": "1732109915568",
+        "msgType": "webchat",
+        "content": {},
+        "params": null,
+        "time": "2024-11-20 20:38:36.f",
+        "id": "",
+        "catId": ""
+    },
+    {
+        "msgId": "6052881072523",
+        "uidFrom": "0",
+        "cliMsgId": "1732109920479",
+        "msgType": "chat.sticker",
+        "content": {
+            "id": 24101,
+            "catId": 10483,
+            "type": 3,
+            "extInfo": null
+        },
+        "params": null,
+        "time": "2024-11-20 20:38:41.f",
+        "id": 24101,
+        "catId": 10483
+    },
+    {
+        "msgId": "6052881080548",
+        "uidFrom": "1550318194389905308",
+        "cliMsgId": "1732109920607",
+        "msgType": "webchat",
+        "content": {},
+        "params": null,
+        "time": "2024-11-20 20:38:41.f",
+        "id": "",
+        "catId": ""
+    },
+    {
+        "msgId": "6052881540969",
+        "uidFrom": "0",
+        "cliMsgId": "1732109928113",
+        "msgType": "chat.sticker",
+        "content": {
+            "id": 27,
+            "catId": 0,
+            "type": 2,
+            "extInfo": null
+        },
+        "params": null,
+        "time": "2024-11-20 20:38:48.f",
+        "id": 27,
+        "catId": 0
+    },
+    {
+        "msgId": "6052881604177",
+        "uidFrom": "0",
+        "cliMsgId": "1732109929141",
+        "msgType": "chat.sticker",
+        "content": {
+            "id": 26,
+            "catId": 0,
+            "type": 2,
+            "extInfo": null
+        },
+        "params": null,
+        "time": "2024-11-20 20:38:49.f",
+        "id": 26,
+        "catId": 0
+    },
+    {
+        "msgId": "6052882188116",
+        "uidFrom": "8457253091788739137",
+        "cliMsgId": "1732109938654",
+        "msgType": "chat.sticker",
+        "content": {
+            "id": 22140,
+            "catId": 10340,
+            "type": 3,
+            "extInfo": null
+        },
+        "params": null,
+        "time": "2024-11-20 20:38:59.f",
+        "id": 22140,
+        "catId": 10340
+    },
+    {
+        "msgId": "6052882554059",
+        "uidFrom": "0",
+        "cliMsgId": "1732109944918",
+        "msgType": "webchat",
+        "content": {},
+        "params": null,
+        "time": "2024-11-20 20:39:06.f",
+        "id": "",
+        "catId": ""
+    },
+    {
+        "msgId": "6052882759150",
+        "uidFrom": "7648839908887704889",
+        "cliMsgId": "1732109947991",
+        "msgType": "webchat",
+        "content": {},
+        "params": null,
+        "time": "2024-11-20 20:39:08.f",
+        "id": "",
+        "catId": ""
+    },
+    {
+        "msgId": "6052882898355",
+        "uidFrom": "8457253091788739137",
+        "cliMsgId": "1732109950273",
+        "msgType": "chat.sticker",
+        "content": {
+            "id": 1,
+            "catId": 0,
+            "type": 2,
+            "extInfo": null
+        },
+        "params": null,
+        "time": "2024-11-20 20:39:10.f",
+        "id": 1,
+        "catId": 0
+    },
+    {
+        "msgId": "6052883429318",
+        "uidFrom": "8457253091788739137",
+        "cliMsgId": "1732109958984",
+        "msgType": "chat.sticker",
+        "content": {
+            "id": 25339,
+            "catId": 10588,
+            "type": 3,
+            "extInfo": null
+        },
+        "params": null,
+        "time": "2024-11-20 20:39:20.f",
+        "id": 25339,
+        "catId": 10588
+    },
+    {
+        "msgId": "6052883557808",
+        "uidFrom": "0",
+        "cliMsgId": "1732109961535",
+        "msgType": "webchat",
+        "content": {},
+        "params": null,
+        "time": "2024-11-20 20:39:22.f",
+        "id": "",
+        "catId": ""
+    },
+    {
+        "msgId": "6052884219601",
+        "uidFrom": "8457253091788739137",
+        "cliMsgId": "1732109970827",
+        "msgType": "chat.photo",
+        "content": {
+            "title": "",
+            "description": "",
+            "href": "https://f67-zpg-r.zdn.vn/jpg/7160724692673343054/83e1e8aea6441d1a4455.jpg",
+            "thumb": "https://f67-zpg-r.zdn.vn/jpg/7160724692673343054/83e1e8aea6441d1a4455.jpg",
+            "childnumber": 0,
+            "action": "",
+            "params": "{\"width\":859,\"height\":1908,\"is_group_layout\":0,\"contentId\":\"1000084172\",\"convertible\":\"jxl\"}",
+            "type": ""
+        },
+        "params": null,
+        "time": "2024-11-20 20:39:33.f",
+        "id": "",
+        "catId": ""
+    },
+    {
+        "msgId": "6052884421995",
+        "uidFrom": "0",
+        "cliMsgId": "1732109975235",
+        "msgType": "chat.photo",
+        "content": {
+            "title": "",
+            "description": "",
+            "href": "https://f63-zpg-r.zdn.vn/3720098363873509689/c60bf3c3822939776038.jpg",
+            "thumb": "https://t-f63-zpg-r.zdn.vn/480/3720098363873509689/c60bf3c3822939776038.jpg",
+            "childnumber": 0,
+            "action": "",
+            "params": "{\"sendSource\":1,\"fileSize\":247671,\"thumbSize\":53932,\"width\":859,\"hd\":\"https:\\/\\/b-f63-zpg-r.zdn.vn\\/3720098363873509689\\/c60bf3c3822939776038.jpg\",\"hdSize\":344622,\"height\":1908}",
+            "type": ""
+        },
+        "params": null,
+        "time": "2024-11-20 20:39:36.f",
+        "id": "",
+        "catId": ""
+    },
+    {
+        "msgId": "6052884388541",
+        "uidFrom": "301252534789559089",
+        "cliMsgId": "1732109974733",
+        "msgType": "webchat",
+        "content": {},
+        "params": null,
+        "time": "2024-11-20 20:39:36.f",
+        "id": "",
+        "catId": ""
+    },
+    {
+        "msgId": "6052884529185",
+        "uidFrom": "6672645866593992581",
+        "cliMsgId": "1732109977036",
+        "msgType": "webchat",
+        "content": {},
+        "params": null,
+        "time": "2024-11-20 20:39:37.f",
+        "id": "",
+        "catId": ""
+    },
+    {
+        "msgId": "6052884734753",
+        "uidFrom": "301252534789559089",
+        "cliMsgId": "1732109980376",
+        "msgType": "webchat",
+        "content": {},
+        "params": null,
+        "time": "2024-11-20 20:39:41.f",
+        "id": "",
+        "catId": ""
+    },
+    {
+        "msgId": "6052885028345",
+        "uidFrom": "301252534789559089",
+        "cliMsgId": "1732109985217",
+        "msgType": "webchat",
+        "content": {},
+        "params": null,
+        "time": "2024-11-20 20:39:45.f",
+        "id": "",
+        "catId": ""
+    },
+    {
+        "msgId": "6052885091863",
+        "uidFrom": "1311773740162244395",
+        "cliMsgId": "1732109986892",
+        "msgType": "chat.voice",
+        "content": {
+            "title": "",
+            "description": "",
+            "href": "https://tmpfiles.org/dl/16071528/image.webp",
+            "thumb": "",
+            "childnumber": 0,
+            "action": "",
+            "params": "{\"fileSize\":2472985,\"m4a\":\"https:\\/\\/tmpfiles.org\\/dl\\/16071528\\/image.webp\"}",
+            "type": ""
+        },
+        "params": null,
+        "time": "2024-11-20 20:39:48.f",
+        "id": "",
+        "catId": ""
+    },
+    {
+        "msgId": "6052885339087",
+        "uidFrom": "8457253091788739137",
+        "cliMsgId": "1732109988249",
+        "msgType": "chat.video.msg",
+        "content": {
+            "title": "",
+            "description": "",
+            "href": "https://f107-zvc.dlmd.me/gr/1a145fbef3f21eac47e3/1272303810326505205",
+            "thumb": "https://f53-zpg-r.zdn.vn/5105047068535703613/0652dd2e92c4299a70d5.jpg",
+            "childnumber": 0,
+            "action": "",
+            "params": "{\"duration\":34000,\"is_group_layout\":0,\"video_original_width\":1024,\"video_original_height\":576,\"video_width\":1024,\"video_height\":576,\"video_rotation\":0,\"fileSize\":4883071,\"isHD\":0}",
+            "type": ""
+        },
+        "params": null,
+        "time": "2024-11-20 20:39:51.f",
+        "id": "",
+        "catId": ""
+    },
+    {
+        "msgId": "6052885434502",
+        "uidFrom": "2980645594259459394",
+        "cliMsgId": "1732109991103",
+        "msgType": "webchat",
+        "content": {},
+        "params": null,
+        "time": "2024-11-20 20:39:52.f",
+        "id": "",
+        "catId": ""
+    },
+    {
+        "msgId": "6052885480074",
+        "uidFrom": "0",
+        "cliMsgId": "1732109993099",
+        "msgType": "chat.video.msg",
+        "content": {
+            "title": "",
+            "description": "",
+            "href": "https://f107-zvc.dlmd.me/gr/1a145fbef3f21eac47e3/1272303810326505205",
+            "thumb": "https://f53-zpg-r.zdn.vn/5105047068535703613/0652dd2e92c4299a70d5.jpg",
+            "childnumber": 0,
+            "action": "",
+            "params": "{\"duration\":34000,\"video_height\":576,\"fileSize\":0,\"video_width\":1024}",
+            "type": ""
+        },
+        "params": null,
+        "time": "2024-11-20 20:39:54.f",
+        "id": "",
+        "catId": ""
+    },
+    {
+        "msgId": "6052885629308",
+        "uidFrom": "301252534789559089",
+        "cliMsgId": "1732109995080",
+        "msgType": "webchat",
+        "content": {},
+        "params": null,
+        "time": "2024-11-20 20:39:55.f",
+        "id": "",
+        "catId": ""
+    },
+    {
+        "msgId": "6052886693512",
+        "uidFrom": "6672645866593992581",
+        "cliMsgId": "1732110012520",
+        "msgType": "webchat",
+        "content": {},
+        "params": null,
+        "time": "2024-11-20 20:40:13.f",
+        "id": "",
+        "catId": ""
+    }
+]
