@@ -4,6 +4,7 @@ from zlapi import ZaloAPI
 from threading import Thread
 from zlapi.models import *
 import time
+from config import ADMIN
 
 
 SETTING_FILE = 'setting.json'
@@ -163,6 +164,9 @@ def load_config():
         return None, None
 
 def is_admin(author_id):
+    # Ưu tiên ADMIN cấu hình trong config.py
+    if author_id == ADMIN:
+        return True
     settings = read_settings()
     admin_bot = settings.get("admin_bot", [])
     if author_id in admin_bot:
@@ -173,7 +177,9 @@ def is_admin(author_id):
 def handle_bot_admin(bot):
     settings = read_settings()
     admin_bot = settings.get("admin_bot", [])
-    if bot.uid not in admin_bot:
+    # Lọc bỏ các giá trị None/trống do ghi lúc chưa login xong
+    admin_bot = [uid for uid in admin_bot if uid]
+    if bot.uid and bot.uid not in admin_bot:
         admin_bot.append(bot.uid)
         settings['admin_bot'] = admin_bot
         write_settings(settings)

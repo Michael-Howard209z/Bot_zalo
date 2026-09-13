@@ -7,14 +7,14 @@ from gtts import gTTS
 
 des = {
     'version': "1.0.2",
-    'credits': "TRBAYK (NGSON)",
+    'credits': "Dau Cac",
     'description': "Chuyển đổi văn bản thành voice"
 }
 
 def convert_text_to_mp3(text):
     try:
         tts = gTTS(text=text, lang='vi')
-        mp3_file = 'NGSONVOICE.mp3'
+        mp3_file = 'NGHOANGVOICE.mp3'
         tts.save(mp3_file)
         return mp3_file
     except Exception as e:

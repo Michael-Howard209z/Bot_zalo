@@ -50,7 +50,7 @@ class Client(ZaloAPI):
         handle_bot_admin(self)
         self.version = 1.1
         self.me_name = "Bot by NguyenHoangDev"
-        self.date_update = "12/01/2025"
+        self.date_update = "09/13/2026"
         self.command_handler = CommandHandler(self)
 
     def onEvent(self, event_data, event_type):
