@@ -1,6 +1,10 @@
 from zlapi.models import Message, ThreadType
+import threading
 import time
 import re
+from modules.bot_info import is_admin
+
+MAX_DELAY = 30
 
 des = {
     'version': "1.0.0",
@@ -14,7 +18,14 @@ def handle_join_spam(message, message_object, thread_id, thread_type, author_id,
     Ví dụ: !join https://zalo.me/g/abcxyz 5 Hello mọi người
     """
     content = message.split()
-    
+
+    if not is_admin(author_id):
+        client.replyMessage(
+            Message(text="Bạn không có quyền sử dụng lệnh này."),
+            message_object, thread_id, thread_type
+        )
+        return
+
     if len(content) < 3:
         client.replyMessage(
             Message(text=" Sai cú pháp!\nSử dụng: <prefix>join <link_nhóm> <delay> <nội dung tin nhắn>"),
@@ -28,6 +39,12 @@ def handle_join_spam(message, message_object, thread_id, thread_type, author_id,
     except ValueError:
         client.replyMessage(Message(text="Delay phải là số giây (ví dụ: 5)."), message_object, thread_id, thread_type)
         return
+
+    if delay < 0:
+        delay = 0
+    if delay > MAX_DELAY:
+        client.replyMessage(Message(text=f"Delay tối đa {MAX_DELAY} giây, đã tự cắt xuống {MAX_DELAY}s."), message_object, thread_id, thread_type)
+        delay = MAX_DELAY
         
     msg_text = " ".join(content[3:])
     if not msg_text:
@@ -40,41 +57,45 @@ def handle_join_spam(message, message_object, thread_id, thread_type, author_id,
         return
     
     code = match.group(1)
-    
-    try:
-        client.replyMessage(Message(text=f"Đang thực hiện vào nhóm..."), message_object, thread_id, thread_type)
-        
-        # Thực hiện join
-        res = client.joinGroup(code)
-        
-        target_group_id = None
-        
-        # Xử lý kết quả trả về để lấy Group ID
-        if isinstance(res, dict) and 'groupId' in res:
-            target_group_id = res['groupId']
-        elif hasattr(res, 'groupId'):
-            target_group_id = res.groupId
-        elif isinstance(res, str) and res.isdigit():
-            target_group_id = res
-            
-        if not target_group_id:
-            client.replyMessage(Message(text="Đã gửi yêu cầu vào nhóm nhưng không lấy được ID nhóm để gửi tin nhắn."), message_object, thread_id, thread_type)
-            return
 
-        # Đợi delay
-        if delay > 0:
-            time.sleep(delay)
-        
-        # Gửi tin nhắn vào nhóm mới
-        client.send(Message(text=msg_text), target_group_id, ThreadType.GROUP)
-        
-        # Rời nhóm
-        client.leaveGroup(target_group_id)
-        
-        client.replyMessage(Message(text=f"Đã hoàn thành nhiệm vụ!\n- Vào nhóm: {target_group_id}\n- Gửi tin: '{msg_text}'\n- Đã rời nhóm"), message_object, thread_id, thread_type)
+    def run():
+        try:
+            client.replyMessage(Message(text=f"Đang thực hiện vào nhóm..."), message_object, thread_id, thread_type)
 
-    except Exception as e:
-        client.replyMessage(Message(text=f"Lỗi: {str(e)}"), message_object, thread_id, thread_type)
+            # Thực hiện join
+            res = client.joinGroup(code)
+
+            target_group_id = None
+
+            # Xử lý kết quả trả về để lấy Group ID
+            if isinstance(res, dict) and 'groupId' in res:
+                target_group_id = res['groupId']
+            elif hasattr(res, 'groupId'):
+                target_group_id = res.groupId
+            elif isinstance(res, str) and res.isdigit():
+                target_group_id = res
+
+            if not target_group_id:
+                client.replyMessage(Message(text="Đã gửi yêu cầu vào nhóm nhưng không lấy được ID nhóm để gửi tin nhắn."), message_object, thread_id, thread_type)
+                return
+
+            # Đợi delay
+            if delay > 0:
+                time.sleep(delay)
+
+            # Gửi tin nhắn vào nhóm mới
+            client.send(Message(text=msg_text), target_group_id, ThreadType.GROUP)
+
+            # Rời nhóm
+            client.leaveGroup(target_group_id)
+
+            client.replyMessage(Message(text=f"Đã hoàn thành nhiệm vụ!\n- Vào nhóm: {target_group_id}\n- Gửi tin: '{msg_text}'\n- Đã rời nhóm"), message_object, thread_id, thread_type)
+
+        except Exception as e:
+            client.replyMessage(Message(text=f"Lỗi: {str(e)}"), message_object, thread_id, thread_type)
+
+    # Chạy thread riêng để không treo listener chính (main.py dùng listen(thread=False))
+    threading.Thread(target=run, daemon=True).start()
 
 def get_hzlbot():
     return {

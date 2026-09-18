@@ -1,6 +1,7 @@
 import re
 from zlapi.models import Message
 from config import ADMIN
+from modules.bot_info import is_admin
 
 des = {
     'version': "1.0.1",
@@ -13,6 +14,13 @@ url_pattern = re.compile(
 )
 
 def send_link(message, message_object, thread_id, thread_type, author_id, client):
+    if not is_admin(author_id):
+        client.sendMessage(
+            Message(text="🚫 Bạn không có quyền sử dụng lệnh này."),
+            thread_id, thread_type
+        )
+        return
+
     parts = message.split('|')
     if len(parts) < 5:
         client.sendMessage(

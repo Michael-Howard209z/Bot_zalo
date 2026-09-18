@@ -1,5 +1,6 @@
 from zlapi.models import Message
 from config import ADMIN
+from modules.bot_info import is_admin
 import time 
 
 des = {
@@ -9,6 +10,11 @@ des = {
 }
 
 def handle_adduser_by_phone_command(message, message_object, thread_id, thread_type, author_id, client):
+    if not is_admin(author_id):
+        gui = Message(text="Bạn không có quyền sử dụng lệnh này.")
+        client.sendMessage(gui, thread_id, thread_type)
+        return
+
     text = message.split()
 
     if len(text) < 2:
